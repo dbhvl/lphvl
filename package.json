@@ -1,0 +1,28 @@
+{
+  "name": "desain-lp-hvl",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Template desain Landing Page Hai Velyu Studio — halaman marketing statis (ekstrak dari apps/dashboard, tanpa auth/API).",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "npx serve out"
+  },
+  "dependencies": {
+    "lucide-react": "^1.23.0",
+    "next": "16.2.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp"]
+  }
+}

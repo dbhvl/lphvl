@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Template desain LP — tema gelap dikendalikan penuh oleh toggle lokal
+   di dalam LandingPage (state React, bukan class .dark global). */
+
+body {
+  margin: 0;
+}
