@@ -5,3 +5,6 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .pnpm-store/
+
+# Log dev server
+dev.log
