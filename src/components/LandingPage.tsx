@@ -10,14 +10,21 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import {
   Menu, X, Sun, Moon, Check, ArrowRight, ChevronDown, ArrowUp,
+  Lock, Signal, Wifi, BatteryFull,
 } from 'lucide-react';
-import { getHomepageFaqs, getTotalFaqCount } from '@/data/faqData';
+import { getHomepageFaqs } from '@/data/faqData';
+import { THEME_KEY } from '@/lib/theme';
 
 const WHATSAPP_URL =
   'https://wa.me/6287783974066?text=Halo%20Hai%20Velyu%2C%20saya%20punya%20pertanyaan%20tentang%20platform';
 
 const SERIF = { fontFamily: 'var(--font-playfair), Georgia, serif' };
 const SANS = { fontFamily: 'var(--font-jakarta), system-ui, sans-serif' };
+
+/* Grading seragam untuk semua foto halaman — foto stock bervariasi tone (terang
+   vs gelap), filter ini menyatukannya menjadi satu set editorial. Saat sudah ada
+   foto asli dari satu fotografer, hapus konstanta ini dan pemakaiannya. */
+const GRADE = 'saturate-[0.88] sepia-[0.08] contrast-[1.02]';
 
 function HexMark({ className = '' }: { className?: string }) {
   return (
@@ -27,19 +34,150 @@ function HexMark({ className = '' }: { className?: string }) {
   );
 }
 
-function QrMock({ className = '' }: { className?: string }) {
+function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <svg viewBox="0 0 28 28" fill="currentColor" aria-hidden="true" className={className}>
-      <path fillRule="evenodd" d="M2 2h9v9H2V2Zm2 2v5h5V4H4Z" />
-      <path fillRule="evenodd" d="M17 2h9v9h-9V2Zm2 2v5h5V4h-5Z" />
-      <path fillRule="evenodd" d="M2 17h9v9H2v-9Zm2 2v5h5v-5H4Z" />
-      <rect x="14" y="3" width="2" height="2" /><rect x="14" y="8" width="2" height="2" />
-      <rect x="3" y="14" width="2" height="2" /><rect x="8" y="14" width="2" height="2" />
-      <rect x="14" y="14" width="2" height="2" /><rect x="18" y="17" width="2" height="2" />
-      <rect x="22" y="14" width="2" height="2" /><rect x="17" y="22" width="2" height="2" />
-      <rect x="14" y="19" width="1" height="1" /><rect x="21" y="21" width="2" height="2" />
-      <rect x="14" y="24" width="2" height="2" /><rect x="24" y="18" width="2" height="2" />
-    </svg>
+    <div className="rounded-[2.5rem] border-[5px] border-[#0F1930] bg-[#0F1930] shadow-[0_32px_64px_-28px_rgba(13,27,54,0.5)]">
+      <div className="relative overflow-hidden rounded-[2.1rem] bg-white">
+        {children}
+        <div className="pointer-events-none absolute bottom-1.5 left-1/2 z-30 h-1 w-16 -translate-x-1/2 rounded-full bg-white/85" />
+      </div>
+    </div>
+  );
+}
+
+/* Status bar + dynamic island — tone mengikuti latar di bawahnya (foto = light, header putih = dark) */
+function PhoneChrome({ tone }: { tone: 'light' | 'dark' }) {
+  return (
+    <>
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 pt-2.5 text-[10px] font-semibold ${
+          tone === 'light' ? 'text-white' : 'text-[#1B2A4A]'
+        }`}
+      >
+        <span>09.41</span>
+        <span className="flex items-center gap-1">
+          <Signal size={11} strokeWidth={2.5} />
+          <Wifi size={11} strokeWidth={2.5} />
+          <BatteryFull size={14} strokeWidth={1.8} />
+        </span>
+      </div>
+      <div className="pointer-events-none absolute left-1/2 top-2 z-30 h-4 w-16 -translate-x-1/2 rounded-full bg-[#0F1930]" />
+    </>
+  );
+}
+
+/* 15 + 20 + 15 = 50 foto — harus cocok dengan klaim "Semua 50 foto" di TIERS */
+const ALBUM_SECTIONS = [
+  { src: '/images/website/pexels-11600628.jpg', title: 'Section 1 · Akad', count: '15 foto', open: true },
+  { src: '/images/website/pexels-26653479.jpg', title: 'Section 2 · Resepsi', count: '20 foto', open: false },
+  { src: '/images/website/pexels-11895939.jpg', title: 'Section 3 · Portret', count: '15 foto', open: false },
+];
+
+/* Layar sampul — yang dilihat klien begitu membuka link album */
+function AlbumCoverPhone() {
+  return (
+    <PhoneFrame>
+      <div className="relative aspect-[9/20] w-full bg-[#0D1B36]">
+        <Image
+          src="/images/website/px-11895938-768.webp"
+          alt="Sampul album: pengantin berhadapan"
+          fill
+          sizes="260px"
+          className={`object-cover ${GRADE}`}
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/45 via-[#0D1B36]/5 to-[#0D1B36]/45" />
+        <PhoneChrome tone="light" />
+        <div className="absolute inset-0 flex flex-col justify-end">
+          <div className="px-4 pb-4 text-center text-white [text-shadow:0_1px_14px_rgba(13,27,54,0.6)]">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.3em] text-white/75">Album Wedding</p>
+            <h4 className="mt-1 text-[21px] leading-tight" style={SERIF}>
+              Raka &amp; Salsabila
+            </h4>
+            <p className="mt-0.5 text-[10px] font-medium text-white/80">12 April 2026</p>
+          </div>
+          <div className="rounded-t-[1.5rem] bg-white px-4 pb-6 pt-2 shadow-[0_-8px_24px_rgba(13,27,54,0.25)]">
+            <div className="mx-auto h-1 w-9 rounded-full bg-[#E2E8F0]" />
+            <div className="mt-3.5 space-y-2.5">
+              {ALBUM_SECTIONS.map((s) => (
+                <div key={s.title} className="flex items-center gap-2.5">
+                  <Image src={s.src} alt="" width={76} height={76} className={`h-9.5 w-9.5 shrink-0 rounded-lg object-cover ${GRADE}`} />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[11px] font-semibold text-[#1B2A4A]">{s.title}</p>
+                    <p className="text-[10px] text-[#5B6B84]">{s.count}</p>
+                  </div>
+                  {s.open ? (
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2BB3D8]/15">
+                      <Check size={11} strokeWidth={3} className="text-[#2BB3D8]" />
+                    </span>
+                  ) : (
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E2E8F0]">
+                      <Lock size={10} className="text-[#5B6B84]" />
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="mt-3.5 rounded-xl bg-[#1B2A4A] py-2.5 text-center text-[11px] font-semibold text-white">
+              Buka Full Access · Rp45.000
+            </div>
+          </div>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+/* Layar galeri — Complete aktif: Section 1-2 bersih, Section 3 masih ber-watermark */
+function AlbumGalleryPhone() {
+  return (
+    <PhoneFrame>
+      <div className="relative aspect-[9/20] w-full bg-white">
+        <PhoneChrome tone="dark" />
+        <div className="px-4 pt-10 text-center">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#5B6B84]">Raka &amp; Salsabila</p>
+          <div className="mx-auto mt-2.5 flex w-fit gap-1 rounded-full bg-[#F6F8FB] p-1">
+            {['Highlight', 'Complete', 'Full Access'].map((t, i) => (
+              <span
+                key={t}
+                className={`rounded-full px-2.5 py-1 text-[9px] font-semibold ${i === 1 ? 'bg-[#1B2A4A] text-white' : 'text-[#5B6B84]'}`}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-1 px-1">
+          <div className="relative aspect-square overflow-hidden">
+            <Image src="/images/website/pexels-11895939.jpg" alt="Momen couple berpegangan tangan" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
+          </div>
+          <div className="flex aspect-square items-center justify-center bg-[#F6F8FB]">
+            <p className="text-[10px] font-semibold text-[#5B6B84]">+42 foto</p>
+          </div>
+          <div className="relative aspect-square overflow-hidden">
+            <Image src="/images/website/pexels-11600628.jpg" alt="Detail dekorasi pernikahan" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
+          </div>
+          <div className="relative aspect-square overflow-hidden">
+            <Image src="/images/website/pexels-26653479.jpg" alt="Momen hangat resepsi" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
+          </div>
+          {['/images/website/px-11895938-768.webp', '/images/website/pexels-10074148.jpg'].map((src) => (
+            <div key={src} className="relative aspect-square overflow-hidden">
+              <Image src={src} alt="Foto Section 3 yang masih terkunci" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
+              <div className="absolute inset-0 bg-[#0D1B36]/35" />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 rounded-sm border border-white/60 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.25em] text-white">
+                Preview
+              </span>
+              <Lock size={10} className="absolute right-1.5 top-1.5 text-white" />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-x-0 bottom-0 border-t border-[#E2E8F0] bg-white/95 px-4 pb-5 pt-2.5">
+          <div className="rounded-xl bg-[#1B2A4A] py-2.5 text-center text-[11px] font-semibold text-white">
+            Buka Full Access · Rp45.000
+          </div>
+          <p className="mt-1.5 text-center text-[9px] text-[#5B6B84]">Watermark hilang otomatis setelah aktivasi</p>
+        </div>
+      </div>
+    </PhoneFrame>
   );
 }
 
@@ -80,7 +218,6 @@ const TIERS = [
 ];
 
 const FAQS = getHomepageFaqs();
-const TOTAL_FAQ_COUNT = getTotalFaqCount();
 
 export function LandingPage() {
   const [dark, setDark] = useState(false);
@@ -94,6 +231,25 @@ export function LandingPage() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      setDark(saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches);
+    } catch {
+      // localStorage bisa gagal (mis. mode privat) — tetap di tema terang
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    try {
+      localStorage.setItem(THEME_KEY, next ? 'dark' : 'light');
+    } catch {
+      // persistensi adalah bonus — toggle tetap berfungsi tanpa itu
+    }
+  };
 
   return (
     <div className={`min-h-screen ${T.page}`} style={SANS}>
@@ -121,7 +277,7 @@ export function LandingPage() {
           </nav>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setDark(!dark)}
+              onClick={toggleTheme}
               aria-label="Ganti tema terang/gelap"
               className={`rounded-lg border ${T.line} p-2 ${T.muted} hover:text-[#2BB3D8]`}
             >
@@ -166,7 +322,7 @@ export function LandingPage() {
             sizes="100vw"
             priority
             alt="Pengantin berpelukan, kerudung panjang berkibar tertiup angin"
-            className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-center"
+            className={`absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-center ${GRADE}`}
           />
           <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/95 via-[#0D1B36]/50 to-[#0D1B36]/20 md:bg-linear-to-r md:from-[#0D1B36]/95 md:via-[#0D1B36]/55 md:to-[#0D1B36]/10" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-b from-transparent to-[#0D1B36]/70" />
@@ -259,30 +415,8 @@ export function LandingPage() {
               ))}
             </div>
             <div className="mx-auto w-full max-w-65">
-              <div className={`border ${dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#1B2A4A]/15 bg-white'}`}>
-                <Image src="/images/website/px-11895938-768.webp" alt="Sampul album: pengantin berhadapan" width={768} height={1024} className="h-64 w-full object-cover object-top" />
-                <div className="p-4">
-                  <p className="text-lg leading-snug" style={SERIF}>Raka &amp; Salsabila</p>
-                  <p className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] ${T.muted}`}>12 April 2026 · Album Wedding</p>
-                  <div className={`mt-3 grid grid-cols-3 divide-x text-center ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
-                    {[['Highlight', '15 foto'], ['Complete', '30 foto'], ['Full Access', '50 foto']].map(([s, n]) => (
-                      <div key={s} className="px-1 py-1.5">
-                        <p className="text-[9px] font-bold uppercase tracking-wide">{s}</p>
-                        <p className={`text-[9px] ${T.muted}`}>{n}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className={`mt-3 flex items-center justify-between border px-3 py-2 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                    <span className={`text-[10px] font-semibold ${T.muted}`}>Pintasan Google Drive</span>
-                    <span className={`text-xs ${T.muted}`}>&#x2197;</span>
-                  </div>
-                  <div className={`mt-2 flex items-center gap-2.5 border px-3 py-2 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                    <QrMock className={`h-7 w-7 shrink-0 ${textStrong}`} />
-                    <span className={`text-[10px] leading-snug ${T.muted}`}>QR souvenir — dicetak untuk kado pernikahan</span>
-                  </div>
-                </div>
-              </div>
-              <p className={`mt-3 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Tampilan album di ponsel klien</p>
+              <AlbumCoverPhone />
+              <p className={`mt-4 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Tampilan album di ponsel klien</p>
             </div>
           </div>
         </div>
@@ -339,7 +473,7 @@ export function LandingPage() {
           </p>
           <div className="mt-10 grid grid-cols-2 gap-3 md:hidden">
             {GALLERY.map((g) => (
-              <Image key={g.src} src={g.src} alt={g.alt} width={1200} height={900} className={`w-full object-cover ${g.m}`} />
+              <Image key={g.src} src={g.src} alt={g.alt} width={1200} height={900} className={`w-full object-cover ${GRADE} ${g.m}`} />
             ))}
           </div>
 
@@ -350,14 +484,14 @@ export function LandingPage() {
                 alt="Pengantin berhadapan, dahi bertemu — studio putih"
                 width={768}
                 height={1024}
-                className="col-span-5 h-130 w-full object-cover"
+                className={`col-span-5 h-130 w-full object-cover ${GRADE}`}
               />
               <Image
                 src="/images/website/pexels-11895939.jpg"
                 alt="Couple berpegangan tangan"
                 width={1200}
                 height={1600}
-                className="col-span-4 mt-16 h-100 w-full object-cover"
+                className={`col-span-4 mt-16 h-100 w-full object-cover ${GRADE}`}
               />
               <div className="col-span-3 py-1 pt-6">
                 <div>
@@ -388,14 +522,14 @@ export function LandingPage() {
                 alt="Momen hangat resepsi"
                 width={1200}
                 height={800}
-                className="col-span-7 h-70 w-full object-cover object-[center_30%]"
+                className={`col-span-7 h-70 w-full object-cover object-[center_30%] ${GRADE}`}
               />
               <Image
                 src="/images/website/pexels-10074148.jpg"
                 alt="Detail dekorasi pernikahan"
                 width={1200}
                 height={800}
-                className="col-span-5 h-70 w-full object-cover"
+                className={`col-span-5 h-70 w-full object-cover ${GRADE}`}
               />
             </div>
           </div>
@@ -424,35 +558,9 @@ export function LandingPage() {
                   ))}
                 </ul>
               </div>
-              <div className={`border ${dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#1B2A4A]/15 bg-white'}`}>
-                <div className="relative">
-                  <Image src="/images/website/pexels-11895938.jpg" alt="Sampul album: couple Indonesia berpose elegan" width={1200} height={1600} className="h-72 w-full object-cover object-[center]" />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/85 via-[#0D1B36]/10 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                    <p className="text-2xl" style={SERIF}>Raka &amp; Salsabila</p>
-                    <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">12 April 2026 · 50 foto terkurasi</p>
-                  </div>
-                </div>
-                <div className={`grid grid-cols-3 divide-x border-y ${dark ? 'divide-[#27395C] border-[#27395C]' : 'divide-[#E2E8F0] border-[#E2E8F0]'}`}>
-                  {[['Highlight', '15 foto'], ['Complete', '30 foto'], ['Full Access', '50 foto']].map(([s, n]) => (
-                    <div key={s} className="px-2 py-2.5 text-center">
-                      <p className="text-[10px] font-bold uppercase tracking-wide">{s}</p>
-                      <p className={`text-[10px] ${T.muted}`}>{n}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-3 gap-px">
-                  {[
-                    ['/images/website/pexels-11600628.jpg', 'Detail dekorasi pernikahan'],
-                    ['/images/website/pexels-26653479.jpg', 'Momen hangat resepsi'],
-                    ['/images/website/pexels-11895939.jpg', 'Couple berpegangan tangan'],
-                  ].map(([src, alt]) => (
-                    <Image key={src} src={src} alt={alt} width={800} height={1000} className="aspect-4/5 w-full object-cover" />
-                  ))}
-                </div>
-                <div className={`border-t px-4 py-3 text-center ${T.line}`}>
-                  <p className={`text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Album demo wedding · Segera hadir</p>
-                </div>
+              <div className="mx-auto w-full max-w-70">
+                <AlbumGalleryPhone />
+                <p className={`mt-4 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Pratinjau layar galeri · Segera hadir</p>
               </div>
             </div>
           </div>
@@ -476,10 +584,12 @@ export function LandingPage() {
           </div>
           <div className={`mt-8 border-t pt-6 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
             <a
-              href="#faq"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2BB3D8] hover:underline"
             >
-              Lihat {TOTAL_FAQ_COUNT} pertanyaan lengkap di Pusat Bantuan FAQ <ArrowRight size={14} />
+              Masih ada pertanyaan lain? Tanya langsung via WhatsApp <ArrowRight size={14} />
             </a>
           </div>
         </div>
@@ -514,9 +624,11 @@ export function LandingPage() {
                 <p className="text-base leading-snug" style={SERIF}>SMKN 1 Bawang</p>
                 <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.25em] text-[#C5A059]">Angkatan 2026</p>
                 <div className="mt-3 grid grid-cols-4 gap-0.75">
-                  {['student-01', 'student-02', 'student-03', 'student-04', 'student-05', 'student-06', 'student-07', 'student-08'].map((f) => (
-                    <div key={f} className="aspect-square overflow-hidden bg-[#1A1A1A]">
-                      <Image src={`/images/yearbook/${f}.jpg`} alt="Foto siswa yearbook demo" width={400} height={400} className="h-full w-full object-cover opacity-85" />
+                  {/* Foto siswa asli belum tersedia — inisial monogram dipakai agar
+                      kartu tidak menampilkan gambar rusak (student-*.jpg tidak ada). */}
+                  {['AR', 'BS', 'DN', 'FA', 'KM', 'NR', 'RS', 'WA'].map((n) => (
+                    <div key={n} className="flex aspect-square items-center justify-center border border-[#C5A059]/15 bg-[#141414]">
+                      <span className="text-[10px] tracking-widest text-[#C5A059]/75" style={SERIF}>{n}</span>
                     </div>
                   ))}
                 </div>
@@ -540,7 +652,7 @@ export function LandingPage() {
             fill
             sizes="100vw"
             alt="Couple bergandengan tangan tersenyum di depan gedung klasik berjam besar"
-            className="absolute top-0 left-0 h-full w-[115%] max-w-none object-cover object-[68%_55%] md:object-[0%_55%]"
+            className={`absolute top-0 left-0 h-full w-[115%] max-w-none object-cover object-[68%_55%] md:object-[0%_55%] ${GRADE}`}
           />
           <div className="absolute inset-0 bg-[#0D1B36]/30 mix-blend-multiply" />
           <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/10 via-[#0D1B36]/40 to-[#0D1B36]" />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
+import { THEME_KEY } from '@/lib/theme';
 import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -48,6 +49,12 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning>
       <body className={`${plusJakarta.variable} ${playfair.variable}`}>
+        {/* Set data-theme sebelum first paint — tanpa ini pengguna tema gelap melihat kilap putih */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('${THEME_KEY}');if(t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark'}catch(e){}`,
+          }}
+        />
         {children}
       </body>
     </html>
