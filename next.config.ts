@@ -17,8 +17,12 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   images: {
-    // next/image tanpa optimizer server (tidak ada runtime di ekspor statis)
-    unoptimized: true,
+    // Custom loader: menyisipkan basePath ke src gambar public (lihat
+    // images.loader.mjs). Diperlukan karena next/image tidak otomatis
+    // mem-prefix basePath — tanpa ini gambar 404 di GitHub Pages (/lphvl).
+    // Perhatian: loader kustom tidak bisa dipakai bersama `unoptimized`.
+    loader: 'custom',
+    loaderFile: './images.loader.mjs',
   },
 };
 
