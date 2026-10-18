@@ -286,7 +286,7 @@ export function LandingPage() {
               <button className={`hidden rounded-lg px-2 py-2 text-sm font-medium md:block ${T.muted} hover:text-[#2BB3D8]`}>
                 Masuk
               </button>
-              <a href="#cara-kerja" className={`hidden rounded-xl px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
+              <a href="#cara-kerja" className={`hidden rounded-lg px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
                 Mulai
               </a>
             <button
@@ -307,7 +307,7 @@ export function LandingPage() {
               <a href="#harga" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Harga</a>
               <a href="#tentang" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Tentang</a>
                 <button className={`py-0.5 text-left transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Masuk</button>
-                <a href="#cara-kerja" className={`rounded-xl px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai</a>
+                <a href="#cara-kerja" className={`rounded-lg px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai</a>
             </div>
           </div>
         )}
@@ -327,7 +327,7 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/95 via-[#0D1B36]/50 to-[#0D1B36]/20 md:bg-linear-to-r md:from-[#0D1B36]/95 md:via-[#0D1B36]/55 md:to-[#0D1B36]/10" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-b from-transparent to-[#0D1B36]/70" />
           <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-12 md:pb-20">
-            <p className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
               <span className="inline-block h-px w-8 bg-[#2BB3D8]" />
               Platform album untuk fotografer Indonesia
             </p>
@@ -352,8 +352,8 @@ export function LandingPage() {
 
       {/* STRIP FAKTA */}
       <section className={`border-b ${T.line}`}>
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-5 text-[11px] font-semibold uppercase tracking-[0.18em]">
-          <span className={T.muted}>1 Token = 1 album publish</span>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-5 text-xs font-semibold uppercase tracking-[0.12em]">
+          <span className={T.muted}>1 Token untuk 1 album publish</span>
           <HexMark className={`hidden h-2.5 w-2.5 sm:block ${T.muted}`} />
           <span className={T.muted}>Aktivasi klien mulai <span className={`font-semibold ${textStrong}`}>Rp15.000</span></span>
           <HexMark className={`hidden h-2.5 w-2.5 sm:block ${T.muted}`} />
@@ -416,7 +416,7 @@ export function LandingPage() {
             </div>
             <div className="mx-auto w-full max-w-65">
               <AlbumCoverPhone />
-              <p className={`mt-4 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Tampilan album di ponsel klien</p>
+              <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Tampilan album di ponsel klien</p>
             </div>
           </div>
         </div>
@@ -433,7 +433,25 @@ export function LandingPage() {
             {TIERS.map((tr) => {
               const recommended = tr.name === 'Complete';
               return (
-                <div key={tr.name} className={`${recommended ? 'ring-2 ring-[#2BB3D8]/10 rounded-xl p-4' : ''}`}>
+                <div
+                  key={tr.name}
+                  className={`relative ${
+                    recommended
+                      ? `rounded-xl border p-4 -m-4 shadow-[0_16px_40px_-24px_rgba(13,27,54,0.4)] ${
+                          dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#E2E8F0] bg-white'
+                        }`
+                      : ''
+                  }`}
+                >
+                  {recommended && (
+                    <p
+                      className={`absolute -top-2.5 left-4 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+                        dark ? 'bg-[#2BB3D8] text-[#0D1B36]' : 'bg-[#1B2A4A] text-white'
+                      }`}
+                    >
+                      Rekomendasi
+                    </p>
+                  )}
                   <div className={`border-t pt-5 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
                     <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Aktivasi</p>
                     <h3 className="mt-2 text-base font-bold">{tr.name}</h3>
@@ -560,7 +578,7 @@ export function LandingPage() {
               </div>
               <div className="mx-auto w-full max-w-70">
                 <AlbumGalleryPhone />
-                <p className={`mt-4 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Pratinjau layar galeri · Segera hadir</p>
+                <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Pratinjau layar galeri · Segera hadir</p>
               </div>
             </div>
           </div>
@@ -639,7 +657,7 @@ export function LandingPage() {
                 </div>
               </div>
             </div>
-            <p className={`mt-3 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Tampilan album yearbook</p>
+            <p className={`mt-3 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Tampilan album yearbook</p>
           </div>
         </div>
       </section>
@@ -657,7 +675,7 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-[#0D1B36]/30 mix-blend-multiply" />
           <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/10 via-[#0D1B36]/40 to-[#0D1B36]" />
           <div className="relative mx-auto flex max-w-6xl flex-col justify-center px-5 py-14 md:px-10 md:py-16">
-            <p className="mb-4 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
               <HexMark className="h-3 w-3 text-white/80" />
               Hai Velyu Studio
             </p>
