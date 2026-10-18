@@ -3,8 +3,8 @@
 /* HOME — Zone B marketing, mobile-first (DESIGN-SYSTEM.md + WEBSITE-BLUEPRINT.md).
    Dirender lewat app/page.tsx (gating auth Clerk: tamu = landing, login = dashboard).
    Keputusan Sam 14 Okt 2026: foto px-18699437 (hero) + px-1295983 (CTA akhir),
-   headline "Kirim album, bukan folder", tanpa klaim "permanen", tema toggle lokal
-   selaras /price (migrasi next-themes menyusul untuk semua halaman marketing). */
+   headline dan copy disederhanakan untuk tampilan yang lebih premium.
+*/
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -19,7 +19,6 @@ const WHATSAPP_URL =
 const SERIF = { fontFamily: 'var(--font-playfair), Georgia, serif' };
 const SANS = { fontFamily: 'var(--font-jakarta), system-ui, sans-serif' };
 
-// SIGNATURE HVL — segi enam dari logo, dipakai hemat sebagai "segel brand" (maks 3 konteks per halaman)
 function HexMark({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`inline-block ${className}`}>
@@ -28,7 +27,6 @@ function HexMark({ className = '' }: { className?: string }) {
   );
 }
 
-// QR souvenir pada mock album — pola statis siku (representasi visual, bukan scan asli)
 function QrMock({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 28 28" fill="currentColor" aria-hidden="true" className={className}>
@@ -45,7 +43,6 @@ function QrMock({ className = '' }: { className?: string }) {
   );
 }
 
-// Token tema (DESIGN-SYSTEM §2) — light-first, dark soft (pola toggle lokal, selaras /price)
 const L = {
   page: 'bg-white text-[#1B2A4A]', soft: 'bg-[#F6F8FB]',
   card: 'bg-white border-[#E2E8F0]', line: 'border-[#E2E8F0]',
@@ -92,7 +89,6 @@ export function LandingPage() {
   const T = dark ? D : L;
   const textStrong = dark ? 'text-[#E8EEF6]' : 'text-[#1B2A4A]';
 
-  // Tampilkan tombol back-to-top setelah scroll 300px
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 300);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -101,7 +97,6 @@ export function LandingPage() {
 
   return (
     <div className={`min-h-screen ${T.page}`} style={SANS}>
-      {/* Animasi accordion FAQ — transisi slide-down saat <details> dibuka */}
       <style>{`
         details[open] > p {
           animation: faqSlideIn 0.22s ease-out both;
@@ -115,7 +110,7 @@ export function LandingPage() {
       {/* NAV */}
       <header className={`sticky top-0 z-40 border-b ${T.nav}`}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <a href="#" className="flex items-center gap-2.5">
+          <a href="/" className="flex items-center gap-2.5">
             <Image src="/images/logo.webp" alt="Logo Hai Velyu Studio" width={32} height={32} className="h-8 w-8" />
             <span className="text-[15px] font-bold tracking-tight">Hai Velyu Studio</span>
           </a>
@@ -135,9 +130,9 @@ export function LandingPage() {
               <button className={`hidden rounded-lg px-2 py-2 text-sm font-medium md:block ${T.muted} hover:text-[#2BB3D8]`}>
                 Masuk
               </button>
-              <button className={`hidden rounded-xl px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
-                Mulai Gratis
-              </button>
+              <a href="#cara-kerja" className={`hidden rounded-xl px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
+                Mulai
+              </a>
             <button
               onClick={() => setMenu(!menu)}
               aria-label="Buka menu"
@@ -156,7 +151,7 @@ export function LandingPage() {
               <a href="#harga" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Harga</a>
               <a href="#tentang" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Tentang</a>
                 <button className={`py-0.5 text-left transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Masuk</button>
-                <button className={`rounded-xl px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai Gratis</button>
+                <a href="#cara-kerja" className={`rounded-xl px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai</a>
             </div>
           </div>
         )}
@@ -173,7 +168,6 @@ export function LandingPage() {
             alt="Pengantin berpelukan, kerudung panjang berkibar tertiup angin"
             className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-center"
           />
-          {/* Gradasi SESUAI viewport: mobile bottom-top; desktop kiri-kanan */}
           <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/95 via-[#0D1B36]/50 to-[#0D1B36]/20 md:bg-linear-to-r md:from-[#0D1B36]/95 md:via-[#0D1B36]/55 md:to-[#0D1B36]/10" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-b from-transparent to-[#0D1B36]/70" />
           <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-12 md:pb-20">
@@ -181,19 +175,16 @@ export function LandingPage() {
               <span className="inline-block h-px w-8 bg-[#2BB3D8]" />
               Platform album untuk fotografer Indonesia
             </p>
-            {/* H1 — pemotongan baris hanya di batas frasa (nowrap per frasa): italic tidak boleh terbelah */}
-            <h1 className="max-w-xl text-[30px] leading-[1.15] text-white md:max-w-2xl md:text-[56px] md:leading-[1.08]" style={SERIF}>
-              <span className="whitespace-nowrap">Kirim album,</span> <em className="whitespace-nowrap">bukan folder.</em>
-              <br />
-              <span className="whitespace-nowrap">Bayar sekali,</span> <span className="whitespace-nowrap">tanpa langganan.</span>
+            <h1 className="max-w-xl text-[30px] leading-[1.15] text-white md:max-w-2xl md:text-[48px] md:leading-[1.08]" style={SERIF}>
+              Album digital yang terasa sebagai hadiah.
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75 md:text-base">
-              Untuk fotografer wedding &amp; yearbook: album <span className="whitespace-nowrap">ber-cover,</span> rapi, dan siap dibuka klien dari HP.
+              Untuk fotografer wedding &amp; yearbook — album ber-cover, rapi, dan siap dibuka klien dari HP.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <button className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
+                <a href="#cara-kerja" className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
                   Mulai Gratis
-                </button>
+                </a>
               <a href="#galeri" className="group inline-flex items-center gap-2 py-3 text-sm font-semibold text-white/85 hover:text-white">
                 Lihat demo album
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
@@ -223,7 +214,6 @@ export function LandingPage() {
           <p className={`mt-3 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
             Klien tidak membayar untuk folder. Mereka membayar pengalaman — dan pengalaman itulah yang menaikkan nilai jual Anda.
           </p>
-          {/* Dua bidang terbuka + garis pemisah — bukan dua kartu (radius hanya untuk objek interaktif) */}
           <div className="mt-10 grid gap-0 md:grid-cols-2">
             <div className={`border-b pb-8 md:border-b-0 md:border-r md:pb-0 md:pr-12 ${T.line}`}>
               <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Cara lama</p>
@@ -241,7 +231,6 @@ export function LandingPage() {
                 <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Cover personal + 3 section kurasi — terasa hadiah, bukan sekadar file</li>
                 <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Tombol pintas ke Google Drive Anda — klien tetap bisa mengunduh foto hi-res</li>
                 <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />QR souvenir untuk kado pernikahan</li>
-                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Klien bisa membeli aktivasi langsung dari album</li>
               </ul>
             </div>
           </div>
@@ -269,7 +258,6 @@ export function LandingPage() {
                 </div>
               ))}
             </div>
-            {/* Jangkar produk — album di ponsel klien */}
             <div className="mx-auto w-full max-w-65">
               <div className={`border ${dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#1B2A4A]/15 bg-white'}`}>
                 <Image src="/images/website/px-11895938-768.webp" alt="Sampul album: pengantin berhadapan" width={768} height={1024} className="h-64 w-full object-cover object-top" />
@@ -307,26 +295,28 @@ export function LandingPage() {
           <p className={`mx-auto mt-3 max-w-xl text-center text-sm ${T.muted}`}>
             Aktivasi = klien membuka section album tanpa watermark. Harga di bawah adalah harga dasar. Sebelum dibuka, semua foto tetap terlihat ber-watermark.
           </p>
-          {/* Tiga kolom setara & sejajar — bergaris atas, tanpa kartu, tanpa sorotan tier */}
           <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-            {TIERS.map((tr) => (
-              <div key={tr.name}>
-                <div className={`border-t pt-5 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                  <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Aktivasi</p>
-                  <h3 className="mt-2 text-base font-bold">{tr.name}</h3>
-                  <p className={`mt-1 text-xs ${T.muted}`}>{tr.desc}</p>
-                  <p className="mt-4 text-3xl font-bold tracking-tight">{tr.price}</p>
-                  <ul className="mt-4 space-y-2.5 text-sm">
-                    {tr.items.map((it) => (
-                      <li key={it} className="flex gap-2.5">
-                        <Check size={16} className={`mt-0.5 shrink-0 ${textStrong}`} />
-                        <span className={T.muted}>{it}</span>
-                      </li>
-                    ))}
-                  </ul>
+            {TIERS.map((tr) => {
+              const recommended = tr.name === 'Complete';
+              return (
+                <div key={tr.name} className={`${recommended ? 'ring-2 ring-[#2BB3D8]/10 rounded-xl p-4' : ''}`}>
+                  <div className={`border-t pt-5 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
+                    <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Aktivasi</p>
+                    <h3 className="mt-2 text-base font-bold">{tr.name}</h3>
+                    <p className={`mt-1 text-xs ${T.muted}`}>{tr.desc}</p>
+                    <p className="mt-4 text-3xl font-bold tracking-tight">{tr.price}</p>
+                    <ul className="mt-4 space-y-2.5 text-sm">
+                      {tr.items.map((it) => (
+                        <li key={it} className="flex gap-2.5">
+                          <Check size={16} className={`mt-0.5 shrink-0 ${textStrong}`} />
+                          <span className={T.muted}>{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className={`mx-auto mt-10 max-w-2xl border-t pt-6 ${T.line}`}>
             <p className={`flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] ${textStrong}`}>
@@ -347,17 +337,14 @@ export function LandingPage() {
           <p className={`mt-3 max-w-lg text-sm leading-relaxed ${T.muted}`}>
             Bukan folder berisi file — tapi galeri ber-cover yang bisa dibuka kapan saja <span className="whitespace-nowrap">dari HP.</span>
           </p>
-          {/* Mobile: editorial mini */}
           <div className="mt-10 grid grid-cols-2 gap-3 md:hidden">
             {GALLERY.map((g) => (
               <Image key={g.src} src={g.src} alt={g.alt} width={1200} height={900} className={`w-full object-cover ${g.m}`} />
             ))}
           </div>
 
-          {/* Desktop: 3 kolom sejajar — foto besar | foto medium stagger | caption teks penuh */}
           <div className="hidden md:block">
             <div className="grid grid-cols-12 items-start gap-x-5">
-              {/* Kolom 1 — foto utama, tinggi penuh, portrait */}
               <Image
                 src="/images/website/px-11895938-768.webp"
                 alt="Pengantin berhadapan, dahi bertemu — studio putih"
@@ -365,7 +352,6 @@ export function LandingPage() {
                 height={1024}
                 className="col-span-5 h-130 w-full object-cover"
               />
-              {/* Kolom 2 — foto kedua, sedikit pendek + geser bawah (stagger visual) */}
               <Image
                 src="/images/website/pexels-11895939.jpg"
                 alt="Couple berpegangan tangan"
@@ -373,7 +359,6 @@ export function LandingPage() {
                 height={1600}
                 className="col-span-4 mt-16 h-100 w-full object-cover"
               />
-              {/* Kolom 3 — caption teks: mengalir natural dari atas ke bawah */}
               <div className="col-span-3 py-1 pt-6">
                 <div>
                   <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Galeri Wedding</p>
@@ -384,7 +369,6 @@ export function LandingPage() {
                     Setiap album dibuka dengan cover — nama couple, tanggal, dan foto pilihan Anda. Klien menerima link, bukan folder.
                   </p>
                 </div>
-                {/* Stat block — langsung mengikuti teks */}
                 <div className={`mt-8 border-t pt-6 ${T.line}`}>
                   <div className="space-y-3">
                     {[['50', 'foto dalam 3 section'], ['1', 'link untuk klien'], ['QR', 'souvenir pernikahan']].map(([n, l]) => (
@@ -398,7 +382,6 @@ export function LandingPage() {
               </div>
 
             </div>
-            {/* Baris bawah — foto panorama + detail sempit, setelah 3 kolom utama */}
             <div className="mt-5 grid grid-cols-12 gap-x-5">
               <Image
                 src="/images/website/pexels-26653479.jpg"
@@ -417,10 +400,8 @@ export function LandingPage() {
             </div>
           </div>
 
-          {/* Pratinjau album demo — side-by-side: teks intro kiri + card kanan */}
           <div className={`mt-14 border-t pt-12 ${T.line}`}>
             <div className="grid gap-10 md:grid-cols-2 md:gap-14 md:items-start">
-              {/* Kiri: konteks & fitur album */}
               <div>
                 <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Pratinjau sampul album</p>
                 <h3 className={`mt-3 text-2xl leading-snug ${textStrong}`} style={SERIF}>
@@ -443,10 +424,9 @@ export function LandingPage() {
                   ))}
                 </ul>
               </div>
-              {/* Kanan: mock album card — full-width kolom, tidak narrow */}
               <div className={`border ${dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#1B2A4A]/15 bg-white'}`}>
                 <div className="relative">
-                  <Image src="/images/website/pexels-11895938.jpg" alt="Sampul album: couple Indonesia berpose elegan" width={1200} height={1600} className="h-72 w-full object-cover object-[center_20%]" />
+                  <Image src="/images/website/pexels-11895938.jpg" alt="Sampul album: couple Indonesia berpose elegan" width={1200} height={1600} className="h-72 w-full object-cover object-[center]" />
                   <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/85 via-[#0D1B36]/10 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-5 text-white">
                     <p className="text-2xl" style={SERIF}>Raka &amp; Salsabila</p>
@@ -480,7 +460,7 @@ export function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className={`${T.soft} px-5 py-14 md:py-20`}>
+      <section id="faq" className={`${T.soft} px-5 py-14 md:py-20`}>
         <div className="mx-auto max-w-3xl">
           <h2 className="text-2xl md:text-4xl" style={SERIF}>Pertanyaan yang sering muncul.</h2>
           <div className={`mt-8 divide-y ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
@@ -496,7 +476,7 @@ export function LandingPage() {
           </div>
           <div className={`mt-8 border-t pt-6 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
             <a
-              href="#"
+              href="#faq"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2BB3D8] hover:underline"
             >
               Lihat {TOTAL_FAQ_COUNT} pertanyaan lengkap di Pusat Bantuan FAQ <ArrowRight size={14} />
@@ -505,23 +485,19 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* YEARBOOK PROMO — prioritas 2 di PRD, status Segera. Kartu mock compact: rekonstruksi
-          struktur /demo-yearbook yang nyata — CSS-mock ala QrMock, bukan screenshot.
-          Latar gelap obsidian+brass = identitas template yearbook. Kolom lebih ramping (240px vs 280px). */}
-      <section className="px-5 py-14 md:py-20">
+      {/* YEARBOOK PROMO */}
+      <section id="yearbook" className="px-5 py-14 md:py-20">
         <div className="mx-auto max-w-6xl md:grid md:grid-cols-[1fr_240px] md:items-center md:gap-12">
           <div>
             <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Produk · Segera hadir</p>
             <h2 className="mt-3 max-w-xl text-2xl md:text-4xl" style={SERIF}>Album kenangan kelulusan.</h2>
-            {/* Satu kolom promosi — bahasa visual halaman yang sama: tipografi & garis, tanpa kartu */}
             <p className={`mt-4 max-w-md text-sm leading-relaxed ${T.muted}`}>
               Yearbook digital untuk fotografer sekolah. Satu album untuk satu angkatan — kenangan kelulusan bisa dibuka langsung dari HP. Nilai tambah baru untuk paket kelulusan Anda.
             </p>
-            <a href="#" className={`mt-6 inline-flex items-center gap-1.5 border-b pb-0.5 text-sm font-semibold transition-colors ${dark ? 'border-[#27395C]' : 'border-[#1B2A4A]/30'} hover:border-[#2BB3D8] hover:text-[#2BB3D8]`}>
+            <a href="#galeri" className={`mt-6 inline-flex items-center gap-1.5 border-b pb-0.5 text-sm font-semibold transition-colors ${dark ? 'border-[#27395C]' : 'border-[#1B2A4A]/30'} hover:border-[#2BB3D8]`}>
               Lihat demo <ArrowRight size={14} />
             </a>
           </div>
-          {/* Kartu mock yearbook compact — angka sesuai demo nyata (2 kelas · 12 siswa) */}
           <div className="mt-10 md:mt-0">
             <div className="mx-auto w-full max-w-60 border border-[#C5A059]/25 bg-[#0A0A0A] text-[#E8DEC8]">
               <div className="relative h-24 overflow-hidden">
@@ -556,7 +532,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* CTA AKHIR — satu bidang foto penuh; teks besar di area gelap bawah foto */}
+      {/* CTA AKHIR */}
       <section className="relative">
         <div className="relative overflow-hidden min-h-105 md:min-h-130">
           <Image
@@ -566,7 +542,6 @@ export function LandingPage() {
             alt="Couple bergandengan tangan tersenyum di depan gedung klasik berjam besar"
             className="absolute top-0 left-0 h-full w-[115%] max-w-none object-cover object-[68%_55%] md:object-[0%_55%]"
           />
-          {/* Cast navy (multiply) + gradasi bawah: mood brand & teks kontras */}
           <div className="absolute inset-0 bg-[#0D1B36]/30 mix-blend-multiply" />
           <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/10 via-[#0D1B36]/40 to-[#0D1B36]" />
           <div className="relative mx-auto flex max-w-6xl flex-col justify-center px-5 py-14 md:px-10 md:py-16">
@@ -582,9 +557,9 @@ export function LandingPage() {
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">
               Daftar gratis, publish album pertama dengan 1 Token. Klien bisa membuka akses langsung dari halaman album.
             </p>
-              <button className="mt-7 inline-block w-fit rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
+              <a href="#cara-kerja" className="mt-7 inline-block w-fit rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
                 Mulai Gratis
-              </button>
+              </a>
           </div>
         </div>
       </section>
@@ -606,7 +581,7 @@ export function LandingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Produk</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
                 <li><a href="#galeri" className="hover:text-[#2BB3D8]">Album Wedding</a></li>
-                <li><a href="#" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/40">Segera</span></a></li>
+                <li><a href="#yearbook" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/40">Segera</span></a></li>
                 <li><a href="#" className="hover:text-[#2BB3D8]">Link Bio</a></li>
                 <li><a href="#harga" className="hover:text-[#2BB3D8]">Harga</a></li>
               </ul>
@@ -621,7 +596,7 @@ export function LandingPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Perusahaan</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
-                <li><a href="#" className="hover:text-[#2BB3D8]">FAQ</a></li>
+                <li><a href="#faq" className="hover:text-[#2BB3D8]">FAQ</a></li>
                 <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#2BB3D8]">Kontak via WhatsApp</a></li>
               </ul>
             </div>
@@ -632,7 +607,7 @@ export function LandingPage() {
         </div>
       </footer>
 
-      {/* BACK TO TOP — muncul setelah scroll 300px, posisi fixed kanan bawah */}
+      {/* BACK TO TOP */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Kembali ke atas"
@@ -642,8 +617,7 @@ export function LandingPage() {
           dark
             ? 'border-[#27395C] bg-[#182641] text-[#9DB0CC] hover:text-[#2BB3D8] hover:border-[#2BB3D8]'
             : 'border-[#E2E8F0] bg-white text-[#5B6B84] hover:text-[#1B2A4A] hover:border-[#1B2A4A]'
-        }`}
-      >
+        }`}>
         <ArrowUp size={16} strokeWidth={2} />
       </button>
 
