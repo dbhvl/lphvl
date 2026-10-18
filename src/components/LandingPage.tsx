@@ -36,7 +36,7 @@ function HexMark({ className = '' }: { className?: string }) {
 
 function PhoneFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-[2.5rem] border-[5px] border-[#0F1930] bg-[#0F1930] shadow-[0_32px_64px_-28px_rgba(13,27,54,0.5)]">
+    <div className="rounded-[2.5rem] border-[6px] border-[#0A1220] bg-[#0A1220] shadow-[0_2px_6px_rgba(13,27,54,0.18),0_36px_72px_-28px_rgba(13,27,54,0.55)]">
       <div className="relative overflow-hidden rounded-[2.1rem] bg-white">
         {children}
         <div className="pointer-events-none absolute bottom-1.5 left-1/2 z-30 h-1 w-16 -translate-x-1/2 rounded-full bg-white/85" />
@@ -85,7 +85,7 @@ function AlbumCoverPhone() {
           sizes="260px"
           className={`object-cover ${GRADE}`}
         />
-        <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/45 via-[#0D1B36]/5 to-[#0D1B36]/45" />
+        <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/50 via-[#0D1B36]/10 to-[#0D1B36]/55" />
         <PhoneChrome tone="light" />
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="px-4 pb-4 text-center text-white [text-shadow:0_1px_14px_rgba(13,27,54,0.6)]">
@@ -107,7 +107,7 @@ function AlbumCoverPhone() {
                   </div>
                   {s.open ? (
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2BB3D8]/15">
-                      <Check size={11} strokeWidth={3} className="text-[#2BB3D8]" />
+                      <Check size={11} strokeWidth={3} className="text-[#0E7490]" />
                     </span>
                   ) : (
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E2E8F0]">
@@ -225,6 +225,10 @@ export function LandingPage() {
   const [showTop, setShowTop] = useState(false);
   const T = dark ? D : L;
   const textStrong = dark ? 'text-[#E8EEF6]' : 'text-[#1B2A4A]';
+  /* Aksen teks/interaksi — cyan lolos kontras di tema gelap, tapi di tema
+     terang butuh teal lebih gelap (#0E7490, 5.0:1) untuk WCAG AA. */
+  const accentLink = dark ? 'text-[#2BB3D8]' : 'text-[#0E7490]';
+  const accentHover = dark ? 'hover:text-[#2BB3D8]' : 'hover:text-[#0E7490]';
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 300);
@@ -271,19 +275,19 @@ export function LandingPage() {
             <span className="text-[15px] font-bold tracking-tight">Hai Velyu Studio</span>
           </a>
           <nav className="hidden items-center gap-7 text-sm md:flex">
-            <a href="#cara-kerja" className={`${T.muted} hover:text-[#2BB3D8]`}>Cara Kerja</a>
-            <a href="#harga" className={`${T.muted} hover:text-[#2BB3D8]`}>Harga</a>
-            <a href="#tentang" className={`${T.muted} hover:text-[#2BB3D8]`}>Tentang</a>
+            <a href="#cara-kerja" className={`${T.muted} ${accentHover}`}>Cara Kerja</a>
+            <a href="#harga" className={`${T.muted} ${accentHover}`}>Harga</a>
+            <a href="#tentang" className={`${T.muted} ${accentHover}`}>Tentang</a>
           </nav>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
               aria-label="Ganti tema terang/gelap"
-              className={`rounded-lg border ${T.line} p-2 ${T.muted} hover:text-[#2BB3D8]`}
+              className={`rounded-lg border ${T.line} p-2 ${T.muted} ${accentHover}`}
             >
               {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-              <button className={`hidden rounded-lg px-2 py-2 text-sm font-medium md:block ${T.muted} hover:text-[#2BB3D8]`}>
+              <button className={`hidden rounded-lg px-2 py-2 text-sm font-medium md:block ${T.muted} ${accentHover}`}>
                 Masuk
               </button>
               <a href="#cara-kerja" className={`hidden rounded-lg px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
@@ -303,10 +307,10 @@ export function LandingPage() {
         {menu && (
           <div id="menu-mobile" className={`border-t ${T.line} px-5 py-4 md:hidden`}>
             <div className="flex flex-col gap-3 text-sm">
-              <a href="#cara-kerja" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Cara Kerja</a>
-              <a href="#harga" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Harga</a>
-              <a href="#tentang" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Tentang</a>
-                <button className={`py-0.5 text-left transition-colors ${T.muted} hover:text-[#2BB3D8]`}>Masuk</button>
+              <a href="#cara-kerja" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Cara Kerja</a>
+              <a href="#harga" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Harga</a>
+              <a href="#tentang" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Tentang</a>
+                <button className={`py-0.5 text-left transition-colors ${T.muted} ${accentHover}`}>Masuk</button>
                 <a href="#cara-kerja" className={`rounded-lg px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai</a>
             </div>
           </div>
@@ -335,7 +339,7 @@ export function LandingPage() {
               Album digital yang terasa sebagai hadiah.
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75 md:text-base">
-              Untuk fotografer wedding &amp; yearbook — album ber-cover, rapi, dan siap dibuka klien dari HP.
+              Untuk fotografer wedding &amp; yearbook — album ber-cover, rapi, dan&nbsp;siap dibuka klien dari HP.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <a href="#cara-kerja" className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
@@ -353,7 +357,7 @@ export function LandingPage() {
       {/* STRIP FAKTA */}
       <section className={`border-b ${T.line}`}>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-5 text-xs font-semibold uppercase tracking-[0.12em]">
-          <span className={T.muted}>1 Token untuk 1 album publish</span>
+          <span className={T.muted}><span className={`font-bold ${textStrong}`}>1&nbsp;Token</span> untuk 1 album publish</span>
           <HexMark className={`hidden h-2.5 w-2.5 sm:block ${T.muted}`} />
           <span className={T.muted}>Aktivasi klien mulai <span className={`font-semibold ${textStrong}`}>Rp15.000</span></span>
           <HexMark className={`hidden h-2.5 w-2.5 sm:block ${T.muted}`} />
@@ -362,30 +366,30 @@ export function LandingPage() {
       </section>
 
       {/* MASALAH => SOLUSI */}
-      <section className={`${T.soft} px-5 py-14 md:py-20`}>
+      <section id="masalah" className={`${T.soft} px-5 py-14 md:py-20`}>
         <div className="mx-auto max-w-6xl">
           <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>
             Foto terbaik Anda layak <span className="whitespace-nowrap">lebih dari folder.</span>
           </h2>
           <p className={`mt-3 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Klien tidak membayar untuk folder. Mereka membayar pengalaman — dan pengalaman itulah yang menaikkan nilai jual Anda.
+            Klien tidak membayar untuk folder. Mereka membayar pengalaman — dan&nbsp;pengalaman itulah yang menaikkan nilai jual Anda.
           </p>
           <div className="mt-10 grid gap-0 md:grid-cols-2">
             <div className={`border-b pb-8 md:border-b-0 md:border-r md:pb-0 md:pr-12 ${T.line}`}>
               <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Cara lama</p>
-              <h3 className="mt-2 text-lg font-bold">Kumpulan file di folder</h3>
+              <h3 className={`mt-2 text-lg font-medium ${T.muted}`}>Kumpulan file di folder</h3>
               <ul className={`mt-4 space-y-3 text-sm leading-relaxed ${T.muted}`}>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0" />Klien mengunduh satu per satu, ribet</li>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0" />Tidak ada kesan premium saat diterima</li>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0" />Link lama mudah tercecer dan sulit ditemukan lagi</li>
+                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Klien mengunduh satu per satu, ribet</li>
+                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Tidak ada kesan premium saat diterima</li>
+                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Link lama mudah tercecer dan sulit ditemukan lagi</li>
               </ul>
             </div>
             <div className="pt-8 md:pt-0 md:pl-12">
               <p className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${textStrong}`}><HexMark className={`h-3 w-3 ${textStrong}`} /> Cara Hai Velyu</p>
               <h3 className="mt-2 text-lg font-bold">Album digital ber-cover, siap dibagikan</h3>
-              <ul className={`mt-4 space-y-3 text-sm leading-relaxed ${T.muted}`}>
+              <ul className={`mt-4 space-y-3 text-sm font-medium leading-relaxed ${textStrong}`}>
                 <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Cover personal + 3 section kurasi — terasa hadiah, bukan sekadar file</li>
-                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Tombol pintas ke Google Drive Anda — klien tetap bisa mengunduh foto hi-res</li>
+                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Tombol pintas ke Google Drive Anda — klien tetap bisa mengunduh foto resolusi penuh</li>
                 <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />QR souvenir untuk kado pernikahan</li>
               </ul>
             </div>
@@ -405,7 +409,7 @@ export function LandingPage() {
               {[
                 { n: '01', t: 'Daftar gratis', d: 'Buat akun, lengkapi profil studio Anda. Gratis — tanpa kartu kredit.', ind: '' },
                 { n: '02', t: 'Upload & susun', d: 'Masukkan foto terbaik ke 3 section kurasi. Kapasitas tiap section terjaga — album tetap kurasi, bukan gudang.', ind: 'md:pl-8' },
-                { n: '03', t: 'Publish & bagikan', d: '1 Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
+                { n: '03', t: 'Publish & bagikan', d: '1\u00A0Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
               ].map((s) => (
                 <div key={s.n} className={`border-t pt-5 pb-8 last:pb-0 ${s.ind} ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
                   <p className={`text-4xl ${textStrong}`} style={SERIF}>{s.n}</p>
@@ -453,8 +457,7 @@ export function LandingPage() {
                     </p>
                   )}
                   <div className={`border-t pt-5 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                    <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Aktivasi</p>
-                    <h3 className="mt-2 text-base font-bold">{tr.name}</h3>
+                    <h3 className="text-base font-bold">{tr.name}</h3>
                     <p className={`mt-1 text-xs ${T.muted}`}>{tr.desc}</p>
                     <p className="mt-4 text-3xl font-bold tracking-tight">{tr.price}</p>
                     <ul className="mt-4 space-y-2.5 text-sm">
@@ -513,8 +516,7 @@ export function LandingPage() {
               />
               <div className="col-span-3 py-1 pt-6">
                 <div>
-                  <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Galeri Wedding</p>
-                  <h3 className={`mt-3 text-xl leading-snug ${textStrong}`} style={SERIF}>
+                  <h3 className={`text-xl leading-snug ${textStrong}`} style={SERIF}>
                     Cover personal,<br />terasa seperti hadiah.
                   </h3>
                   <p className={`mt-4 text-sm leading-relaxed ${T.muted}`}>
@@ -605,7 +607,7 @@ export function LandingPage() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2BB3D8] hover:underline"
+              className={`inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}
             >
               Masih ada pertanyaan lain? Tanya langsung via WhatsApp <ArrowRight size={14} />
             </a>
@@ -675,10 +677,6 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-[#0D1B36]/30 mix-blend-multiply" />
           <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/10 via-[#0D1B36]/40 to-[#0D1B36]" />
           <div className="relative mx-auto flex max-w-6xl flex-col justify-center px-5 py-14 md:px-10 md:py-16">
-            <p className="mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
-              <HexMark className="h-3 w-3 text-white/80" />
-              Hai Velyu Studio
-            </p>
             <h2 className="max-w-4xl text-balance text-3xl leading-[1.12] text-white md:text-5xl" style={SERIF}>
               Mulai jual album digital premium.
               <br />
@@ -711,7 +709,7 @@ export function LandingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Produk</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
                 <li><a href="#galeri" className="hover:text-[#2BB3D8]">Album Wedding</a></li>
-                <li><a href="#yearbook" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/40">Segera</span></a></li>
+                <li><a href="#yearbook" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/55">Segera</span></a></li>
                 <li><a href="#" className="hover:text-[#2BB3D8]">Link Bio</a></li>
                 <li><a href="#harga" className="hover:text-[#2BB3D8]">Harga</a></li>
               </ul>
@@ -731,7 +729,7 @@ export function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="mt-10 border-t border-white/10 pt-6 text-xs text-white/45">
+          <div className="mt-10 border-t border-white/10 pt-6 text-xs text-white/60">
             &copy; {new Date().getFullYear()} Hai Velyu Studio &middot; haivelyu.com
           </div>
         </div>
