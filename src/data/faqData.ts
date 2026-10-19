@@ -85,12 +85,18 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
         shortQuestion: 'Apakah klien bisa melihat album sebelum aktivasi?',
         priceQuestion: 'Apakah klien bisa melihat album sebelum aktivasi?',
         answer:
-          'Album tetap bisa dilihat — 7 hari pertama tanpa watermark sama sekali (masa preview gratis), lalu watermark otomatis muncul mulai hari ke-8. Album tidak langsung hilang; ada masa arsip 30 hari tambahan sebelum akhirnya dihapus permanen kalau memang tidak pernah diaktivasi.',
+          'Album tetap bisa dilihat. Hari 0–7 album tayang full version tanpa watermark (masa preview). Di hari ke-7, jika belum aktivasi, watermark muncul menutup foto — album tetap bisa dibuka. Hari ke-30 album diarsipkan; hari ke-60 dihapus permanen, dan hanya data klien (nama, WA, email) yang tetap tersimpan.',
         shortAnswer:
           'Bisa. Semua foto tetap terlihat ber-watermark, dan 7 hari pertama tampil bersih sebagai masa preview. Aktivasi membuka versi bersih sesuai tier yang dipilih.',
         priceAnswer:
           'Bisa. Semua foto tetap terlihat ber-watermark, dan 7 hari pertama tampil bersih sebagai masa preview. Aktivasi membuka versi bersih sesuai tier yang dipilih.',
         isHomepage: true,
+      },
+      {
+        id: 'siklus-hidup-album',
+        question: 'Bagaimana masa berlaku album setelah publish — kapan watermark, arsip, dan penghapusan terjadi?',
+        answer:
+          'Hari 0–7: album tayang full version tanpa watermark. Hari ke-7: watermark muncul menutup foto; album tetap bisa dibuka. Hari ke-30: album diarsipkan. Hari ke-60: album dihapus permanen — hanya data klien (nama, WA, email) yang tetap disimpan. Selama belum aktivasi, klien menerima email pengingat otomatis di hari ke-7, 30, dan 60.',
       },
       {
         id: 'durasi-akses-retensi',
