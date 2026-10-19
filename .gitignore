@@ -7,7 +7,7 @@ next-env.d.ts
 .pnpm-store/
 
 # Log dev server
-dev.log
+dev*.log
 
 # Folder runtime AutoClaw
 .zwork/
