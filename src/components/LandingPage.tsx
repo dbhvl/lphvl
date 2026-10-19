@@ -2,17 +2,17 @@
 
 /* HOME — Zone B marketing, mobile-first (DESIGN-SYSTEM.md + WEBSITE-BLUEPRINT.md).
    Dirender lewat app/page.tsx (gating auth Clerk: tamu = landing, login = dashboard).
-   Keputusan Sam 14 Okt 2026: foto px-18699437 (hero) + px-1295983 (CTA akhir),
-   headline dan copy disederhanakan untuk tampilan yang lebih premium.
+   Keputusan Sam 14 Okt 2026: foto px-18699437 (hero) + px-1295983 (CTA akhir).
+   Keputusan Sam 19 Okt 2026 (KEPUTUSAN-HOMEPAGE.md): home dipangkas menjadi 6 blok;
+   detail tier/FAQ/cara kerja pindah ke /price, /faq, /cara-kerja.
 */
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import {
-  Menu, X, Sun, Moon, Check, ArrowRight, ChevronDown, ArrowUp,
+  Menu, X, Sun, Moon, Check, ArrowRight, ArrowUp,
   Lock, Signal, Wifi, BatteryFull,
 } from 'lucide-react';
-import { getHomepageFaqs } from '@/data/faqData';
 import { THEME_KEY } from '@/lib/theme';
 
 const WHATSAPP_URL =
@@ -66,7 +66,7 @@ function PhoneChrome({ tone }: { tone: 'light' | 'dark' }) {
   );
 }
 
-/* 15 + 20 + 15 = 50 foto — harus cocok dengan klaim "Semua 50 foto" di TIERS */
+/* 15 + 20 + 15 = 50 foto — harus cocok dengan klaim "Semua 50 foto" di /price */
 const ALBUM_SECTIONS = [
   { src: '/images/website/pexels-11600628.jpg', title: 'Section 1 · Akad', count: '15 foto', open: true },
   { src: '/images/website/pexels-26653479.jpg', title: 'Section 2 · Resepsi', count: '20 foto', open: false },
@@ -197,29 +197,6 @@ const D = {
 };
 
 const HERO_SRC = '/images/website/px-18699437-768.webp';
-const GALLERY = [
-  { src: '/images/website/px-11895938-768.webp', alt: 'Pengantin berhadapan, dahi bertemu — studio putih', span: 'md:col-span-7', m: 'col-span-2 aspect-[16/11] object-[center_20%]' },
-  { src: '/images/website/pexels-11600628.jpg', alt: 'Detail dekorasi pernikahan', span: 'md:col-span-5', m: 'col-span-1 aspect-[3/4]' },
-  { src: '/images/website/pexels-11895939.jpg', alt: 'Couple berpegangan tangan', span: 'md:col-span-5', m: 'col-span-1 aspect-[3/4] mt-8' },
-  { src: '/images/website/pexels-26653479.jpg', alt: 'Momen hangat resepsi', span: 'md:col-span-7', m: 'col-span-2 aspect-[16/10]' },
-];
-
-const TIERS = [
-  {
-    name: 'Highlight', price: 'Rp15.000', desc: 'Buka Section 1',
-    items: ['15 foto pilihan terbaik', 'Cover + galeri nyaman di HP'],
-  },
-  {
-    name: 'Complete', price: 'Rp35.000', desc: 'Buka Section 1 + 2',
-    items: ['30 foto terkurasi di 2 section', 'Video YouTube highlight'],
-  },
-  {
-    name: 'Full Access', price: 'Rp45.000', desc: 'Semua section terbuka',
-    items: ['Semua 50 foto, tanpa terkecuali', 'Termasuk video highlight'],
-  },
-];
-
-const FAQS = getHomepageFaqs();
 
 export function LandingPage() {
   const [dark, setDark] = useState(false);
@@ -260,16 +237,6 @@ export function LandingPage() {
 
   return (
     <div className={`min-h-screen ${T.page}`} style={SANS}>
-      <style>{`
-        details[open] > p {
-          animation: faqSlideIn 0.22s ease-out both;
-        }
-        @keyframes faqSlideIn {
-          from { opacity: 0; transform: translateY(-5px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
       {/* NAV */}
       <header className={`sticky top-0 z-40 border-b ${T.nav}`}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
@@ -278,8 +245,8 @@ export function LandingPage() {
             <span className="text-[15px] font-bold tracking-tight">Hai Velyu Studio</span>
           </a>
           <nav className="hidden items-center gap-7 text-sm md:flex">
-            <a href="#cara-kerja" className={`${T.muted} ${accentHover}`}>Cara Kerja</a>
-            <a href="#harga" className={`${T.muted} ${accentHover}`}>Harga</a>
+            <a href="/cara-kerja" className={`${T.muted} ${accentHover}`}>Cara Kerja</a>
+            <a href="/price" className={`${T.muted} ${accentHover}`}>Harga</a>
             <a href="#tentang" className={`${T.muted} ${accentHover}`}>Tentang</a>
           </nav>
           <div className="flex items-center gap-2">
@@ -293,8 +260,8 @@ export function LandingPage() {
               <button className={`hidden rounded-lg px-2 py-2 text-sm font-medium md:block ${T.muted} ${accentHover}`}>
                 Masuk
               </button>
-              <a href="#cara-kerja" className={`hidden rounded-lg px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
-                Mulai
+              <a href="#daftar" className={`hidden rounded-lg px-4 py-2 text-sm font-semibold md:inline-block ${T.btnPrimary}`}>
+                Buat Album
               </a>
             <button
               onClick={() => setMenu(!menu)}
@@ -310,11 +277,11 @@ export function LandingPage() {
         {menu && (
           <div id="menu-mobile" className={`border-t ${T.line} px-5 py-4 md:hidden`}>
             <div className="flex flex-col gap-3 text-sm">
-              <a href="#cara-kerja" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Cara Kerja</a>
-              <a href="#harga" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Harga</a>
+              <a href="/cara-kerja" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Cara Kerja</a>
+              <a href="/price" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Harga</a>
               <a href="#tentang" onClick={() => setMenu(false)} className={`py-0.5 transition-colors ${T.muted} ${accentHover}`}>Tentang</a>
                 <button className={`py-0.5 text-left transition-colors ${T.muted} ${accentHover}`}>Masuk</button>
-                <a href="#cara-kerja" className={`rounded-lg px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Mulai</a>
+                <a href="#daftar" className={`rounded-lg px-4 py-2.5 text-center text-sm font-semibold ${T.btnPrimary}`}>Buat Album</a>
             </div>
           </div>
         )}
@@ -342,14 +309,14 @@ export function LandingPage() {
               Album digital yang terasa sebagai hadiah.
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75 md:text-base">
-              Untuk fotografer wedding &amp; yearbook — album ber-cover, rapi, dan&nbsp;siap dibuka klien dari HP.
+              Susun foto wedding dalam album ber-cover, lalu kirim satu link yang siap dibuka klien dari HP.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <a href="#cara-kerja" className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
-                  Mulai Gratis
+                <a href="#daftar" className="rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
+                  Buat Album
                 </a>
-              <a href="#galeri" className="group inline-flex items-center gap-2 py-3 text-sm font-semibold text-white/85 hover:text-white">
-                Lihat demo album
+              <a href="#demo" className="group inline-flex items-center gap-2 py-3 text-sm font-semibold text-white/85 hover:text-white">
+                Lihat Demo
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -368,14 +335,64 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* TAMPILAN PRODUK — cover personal + bukti konkret */}
+      <section className={`${T.soft} px-5 py-14 md:py-20`}>
+        <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-20">
+          <div>
+            <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Dibuka dengan nama mereka.</h2>
+            <p className={`mt-3 max-w-lg text-sm leading-relaxed md:text-base ${T.muted}`}>
+              Setiap album dibuka dengan cover personal — nama couple, tanggal, dan foto pilihan Anda.
+            </p>
+            <div className={`mt-6 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border px-4 py-2.5 text-sm ${T.card}`}>
+              <span className={`font-semibold ${textStrong}`}>50 foto</span>
+              <span className={T.muted}>·</span><span className={T.muted}>3 section</span>
+              <span className={T.muted}>·</span><span className={T.muted}>1 link</span>
+            </div>
+          </div>
+          <div className="mx-auto w-full max-w-65 md:max-w-90">
+            <AlbumCoverPhone />
+            <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Tampilan album di ponsel klien</p>
+          </div>
+        </div>
+      </section>
+
+      {/* CARA KERJA */}
+      <section id="cara-kerja" className="px-5 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Susun. Publish. Serahkan.</h2>
+          <p className={`mt-3 max-w-lg text-sm leading-relaxed ${T.muted}`}>
+            Tanpa kurva belajar. Semua bisa diselesaikan dari HP — album pertama tayang dalam hitungan menit.
+          </p>
+          <div className="mt-12 max-w-2xl">
+            {[
+              { n: '01', t: 'Daftar gratis', d: 'Buat akun, lengkapi profil studio Anda. Gratis — tanpa kartu kredit.', ind: '' },
+              { n: '02', t: 'Upload & susun', d: 'Masukkan foto terbaik ke 3 section kurasi. Kapasitas tiap section terjaga — album tetap kurasi, bukan gudang.', ind: 'md:pl-8' },
+              { n: '03', t: 'Publish & bagikan', d: '1\u00A0Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
+            ].map((s) => (
+              <div key={s.n} className={`border-t pt-5 pb-8 last:pb-0 ${s.ind} ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
+                <p className={`text-4xl ${textStrong}`} style={SERIF}>{s.n}</p>
+                <h3 className="mt-3 text-base font-bold md:text-lg">{s.t}</h3>
+                <p className={`mt-2 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>{s.d}</p>
+              </div>
+            ))}
+          </div>
+          <p className={`mt-8 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
+            Folder tetap menyimpan file resolusi penuh. Hai Velyu menjadi album yang diterima klien.
+          </p>
+          <a href="/cara-kerja" className={`mt-6 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
+            Pelajari cara kerjanya <ArrowRight size={14} />
+          </a>
+        </div>
+      </section>
+
       {/* DEMO UNLOCK — momen khas produk: watermark hilang saat aktivasi */}
       <section id="demo" className="px-5 py-14 md:py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2 md:gap-20">
           <div>
             <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Coba sendiri</p>
-            <h2 className="mt-3 text-3xl leading-tight md:text-5xl" style={SERIF}>Watermark hilang begitu klien melakukan aktivasi.</h2>
+            <h2 className="mt-3 text-3xl leading-tight md:text-5xl" style={SERIF}>Buka seperti klien Anda.</h2>
             <p className={`mt-5 max-w-md text-base leading-relaxed md:text-lg ${T.muted}`}>
-              Klien melihat semua foto sejak awal — versi bersih terbuka saat mereka aktivasi. Tekan tombol di bawah untuk mencobanya.
+              Klien melihat semua foto sejak awal. Watermark hilang begitu klien melakukan aktivasi — tekan tombol di bawah untuk mencobanya.
             </p>
             <button
               onClick={() => setUnlocked(!unlocked)}
@@ -390,269 +407,20 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* MASALAH => SOLUSI */}
-      <section id="masalah" className={`${T.soft} px-5 py-14 md:py-20`}>
+      {/* PEMBAYARAN — ringkas; detail tier & margin di /price */}
+      <section className={`${T.soft} px-5 py-14 md:py-20`}>
         <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>
-            Foto terbaik Anda layak <span className="whitespace-nowrap">lebih dari folder.</span>
-          </h2>
-          <p className={`mt-3 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Klien tidak membayar untuk folder. Mereka membayar pengalaman — dan&nbsp;pengalaman itulah yang menaikkan nilai jual Anda.
-          </p>
-          <div className="mt-10 grid gap-0 md:grid-cols-2">
-            <div className={`border-b pb-8 md:border-b-0 md:border-r md:pb-0 md:pr-12 ${T.line}`}>
-              <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Cara lama</p>
-              <h3 className={`mt-2 text-lg font-medium ${T.muted}`}>Kumpulan file di folder</h3>
-              <ul className={`mt-4 space-y-3 text-sm leading-relaxed md:text-base ${T.muted}`}>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Klien mengunduh satu per satu, ribet</li>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Tidak ada kesan premium saat diterima</li>
-                <li className="flex gap-2.5"><X size={15} className="mt-1 shrink-0 opacity-60" />Link lama mudah tercecer dan sulit ditemukan lagi</li>
-              </ul>
-            </div>
-            <div className="pt-8 md:pt-0 md:pl-12">
-              <p className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-widest ${textStrong}`}><HexMark className={`h-3 w-3 ${textStrong}`} /> Cara Hai Velyu</p>
-              <h3 className="mt-2 text-lg font-bold">Album digital ber-cover, siap dibagikan</h3>
-              <ul className={`mt-4 space-y-3 text-sm font-medium leading-relaxed ${textStrong}`}>
-                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Cover personal + 3 section kurasi dalam satu tautan</li>
-                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />Tombol pintas ke Google Drive Anda — klien tetap bisa mengunduh foto resolusi penuh</li>
-                <li className="flex gap-2.5"><Check size={15} className={`mt-1 shrink-0 ${textStrong}`} />QR souvenir untuk kado pernikahan</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CARA KERJA — langkah editorial + jangkar produk */}
-      <section id="cara-kerja" className="px-5 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Tiga langkah, album tayang.</h2>
-          <p className={`mt-3 max-w-lg text-sm leading-relaxed ${T.muted}`}>
-            Tanpa kurva belajar. Semua bisa diselesaikan dari HP — album pertama tayang dalam hitungan menit.
-          </p>
-          <div className="mt-12 grid gap-14 md:grid-cols-[1fr_360px] md:gap-12">
-            <div>
-              {[
-                { n: '01', t: 'Daftar gratis', d: 'Buat akun, lengkapi profil studio Anda. Gratis — tanpa kartu kredit.', ind: '' },
-                { n: '02', t: 'Upload & susun', d: 'Masukkan foto terbaik ke 3 section kurasi. Kapasitas tiap section terjaga — album tetap kurasi, bukan gudang.', ind: 'md:pl-8' },
-                { n: '03', t: 'Publish & bagikan', d: '1\u00A0Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
-              ].map((s) => (
-                <div key={s.n} className={`border-t pt-5 pb-8 last:pb-0 ${s.ind} ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                  <p className={`text-4xl ${textStrong}`} style={SERIF}>{s.n}</p>
-                  <h3 className="mt-3 text-base font-bold md:text-lg">{s.t}</h3>
-                  <p className={`mt-2 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>{s.d}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mx-auto w-full max-w-65 md:max-w-90">
-              <AlbumCoverPhone />
-              <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Tampilan album di ponsel klien</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TIER AKTIVASI */}
-      <section id="harga" className={`${T.soft} px-5 py-14 md:py-20`}>
-        <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Klien membayar sesuai momen yang ingin dibuka.</h2>
-          <p className={`mt-3 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Aktivasi membuka section album tanpa watermark. Harga di bawah adalah harga dasar — sebelum dibuka, semua foto tetap terlihat ber-watermark.
-          </p>
-          <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-            {TIERS.map((tr) => {
-              const recommended = tr.name === 'Complete';
-              return (
-                <div
-                  key={tr.name}
-                  className={`relative ${
-                    recommended
-                      ? `rounded-xl border p-4 -m-4 shadow-[0_16px_40px_-24px_rgba(13,27,54,0.4)] ${
-                          dark ? 'border-[#27395C] bg-[#182641]' : 'border-[#E2E8F0] bg-white'
-                        }`
-                      : ''
-                  }`}
-                >
-                  {recommended && (
-                    <p
-                      className={`absolute -top-2.5 left-4 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                        dark ? 'bg-[#2BB3D8] text-[#0D1B36]' : 'bg-[#1B2A4A] text-white'
-                      }`}
-                    >
-                      Rekomendasi
-                    </p>
-                  )}
-                  <div className={`border-t pt-5 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                    <h3 className="text-base font-bold">{tr.name}</h3>
-                    <p className={`mt-1 text-xs ${T.muted}`}>{tr.desc}</p>
-                    <p className="mt-4 text-3xl font-bold tracking-tight">{tr.price}</p>
-                    <ul className="mt-4 space-y-2.5 text-sm">
-                      {tr.items.map((it) => (
-                        <li key={it} className="flex gap-2.5">
-                          <Check size={16} className={`mt-0.5 shrink-0 ${textStrong}`} />
-                          <span className={T.muted}>{it}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className={`mx-auto mt-10 max-w-2xl border-t pt-6 ${T.line}`}>
-            <p className={`flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] ${textStrong}`}>
-              <HexMark className="h-3 w-3" />
-              Margin untuk Anda
-            </p>
-            <p className={`mt-3 text-sm leading-relaxed md:text-base ${textStrong}`}>
-              Tetapkan harga jual Anda sendiri di atas harga dasar — selisihnya sepenuhnya milik Anda. Anda tidak perlu menagih siapa-siapa: klien membayar langsung dari halaman album.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* GALERI PREVIEW */}
-      <section id="galeri" className="px-5 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Album yang membuat <span className="whitespace-nowrap">klien terkesan.</span></h2>
+          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Satu album, dua pilihan Aktivasi.</h2>
           <p className={`mt-3 max-w-lg text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Setiap album adalah galeri ber-cover yang bisa dibuka kapan saja <span className="whitespace-nowrap">dari HP.</span>
+            Sertakan Aktivasi dalam paket Anda, atau biarkan klien membayar langsung.
           </p>
-          <div className="mt-10 grid grid-cols-2 gap-3 md:hidden">
-            {GALLERY.map((g) => (
-              <Image key={g.src} src={g.src} alt={g.alt} width={1200} height={900} className={`w-full object-cover ${GRADE} ${g.m}`} />
-            ))}
+          <div className={`mt-6 inline-flex items-center gap-x-3 rounded-lg border px-4 py-2.5 text-sm ${T.card}`}>
+            <span className={`font-semibold ${textStrong}`}>Aktivasi mulai Rp15.000</span>
           </div>
-
-          <div className="hidden md:block">
-            <div className="grid grid-cols-12 items-start gap-x-5">
-              <Image
-                src="/images/website/px-11895938-768.webp"
-                alt="Pengantin berhadapan, dahi bertemu — studio putih"
-                width={768}
-                height={1024}
-                className={`col-span-5 h-130 w-full object-cover ${GRADE}`}
-              />
-              <Image
-                src="/images/website/pexels-11895939.jpg"
-                alt="Couple berpegangan tangan"
-                width={1200}
-                height={1600}
-                className={`col-span-4 mt-16 h-114 w-full object-cover ${GRADE}`}
-              />
-              <div className="col-span-3 py-1 pt-6">
-                <div>
-                  <h3 className={`text-xl leading-snug ${textStrong}`} style={SERIF}>
-                    Cover personal,<br />terasa seperti hadiah.
-                  </h3>
-                  <p className={`mt-4 text-sm leading-relaxed md:text-base ${T.muted}`}>
-                    Setiap album dibuka dengan cover — nama couple, tanggal, dan foto pilihan Anda.
-                  </p>
-                </div>
-                <div className={`mt-8 border-t pt-6 ${T.line}`}>
-                  <div className="space-y-3">
-                    {[['50', 'foto dalam 3 section'], ['1', 'link untuk klien'], ['QR', 'souvenir pernikahan']].map(([n, l]) => (
-                      <div key={n} className="flex items-baseline gap-2">
-                        <span className={`text-2xl font-bold tracking-tight ${textStrong}`} style={SERIF}>{n}</span>
-                        <span className={`text-xs ${T.muted}`}>{l}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div className="mt-5 grid grid-cols-12 gap-x-5">
-              <Image
-                src="/images/website/pexels-26653479.jpg"
-                alt="Momen hangat resepsi"
-                width={1200}
-                height={800}
-                className={`col-span-7 h-70 w-full object-cover object-[center_30%] ${GRADE}`}
-              />
-              <Image
-                src="/images/website/pexels-10074148.jpg"
-                alt="Detail dekorasi pernikahan"
-                width={1200}
-                height={800}
-                className={`col-span-5 h-70 w-full object-cover ${GRADE}`}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className={`${T.soft} px-5 py-14 md:py-20`}>
-        <div className="mx-auto max-w-3xl">
-          <h2 className="text-2xl md:text-4xl" style={SERIF}>Pertanyaan yang sering muncul.</h2>
-          <div className={`mt-8 divide-y ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
-            {FAQS.map(([q, a]) => (
-              <details key={q} className="group py-4">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold">
-                  {q}
-                  <ChevronDown size={16} className={`shrink-0 transition-transform group-open:rotate-180 ${T.muted}`} />
-                </summary>
-                <p className={`mt-3 max-w-2xl text-sm leading-relaxed md:text-base ${T.muted}`}>{a}</p>
-              </details>
-            ))}
-          </div>
-          <div className={`mt-8 border-t pt-6 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}
-            >
-              Masih ada pertanyaan lain? Tanya langsung via WhatsApp <ArrowRight size={14} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* YEARBOOK — strip ringkas, produk berikutnya */}
-      <section id="yearbook" className={`border-t ${T.line} px-5 py-10 md:py-14`}>
-        <div className="mx-auto grid max-w-6xl items-center gap-8 md:grid-cols-[1fr_auto] md:gap-14">
           <div>
-            <p className={`text-xs font-semibold uppercase tracking-widest ${T.muted}`}>Produk berikutnya · Segera hadir</p>
-            <h2 className="mt-2 max-w-lg text-xl md:text-2xl" style={SERIF}>Yearbook digital — satu angkatan, satu link.</h2>
-            <p className={`mt-2 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>
-              Album kenangan kelulusan dengan foto per kelas dan profil tiap siswa, dibuka langsung dari HP. Nilai tambah baru untuk paket kelulusan Anda.
-            </p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`mt-4 inline-flex items-center gap-1.5 border-b pb-0.5 text-sm font-semibold transition-colors ${dark ? 'border-[#27395C]' : 'border-[#1B2A4A]/30'} hover:border-[#2BB3D8]`}>
-              Konsultasi via WhatsApp <ArrowRight size={14} />
+            <a href="/price" className={`mt-6 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
+              Lihat harga &amp; pilihan akses <ArrowRight size={14} />
             </a>
-          </div>
-          <div className="mx-auto w-full max-w-44 md:w-44">
-            <div className="border border-[#C5A059]/25 bg-[#0A0A0A] text-[#E8DEC8]">
-              <div className="relative h-14 overflow-hidden">
-                <Image
-                  src="/images/yearbook/school-cover.jpg"
-                  alt="Gedung sekolah — sampul album yearbook demo"
-                  width={1200}
-                  height={800}
-                  className="h-full w-full object-cover opacity-60"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-[#0A0A0A] to-transparent" />
-              </div>
-              <div className="px-3 pb-3 pt-1.5 text-center">
-                <p className="text-sm leading-snug" style={SERIF}>SMKN 1 Bawang</p>
-                <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.25em] text-[#C5A059]">Angkatan 2026</p>
-                <div className="mt-2 grid grid-cols-4 gap-0.5">
-                  {/* Foto siswa asli belum tersedia — inisial monogram dipakai agar
-                      kartu tidak menampilkan gambar rusak (student-*.jpg tidak ada). */}
-                  {['AR', 'BS', 'DN', 'FA', 'KM', 'NR', 'RS', 'WA'].map((n) => (
-                    <div key={n} className="flex aspect-square items-center justify-center border border-[#C5A059]/15 bg-[#141414]">
-                      <span className="text-[8px] tracking-widest text-[#C5A059]/75" style={SERIF}>{n}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-2 border-t border-[#C5A059]/20 pt-1.5 text-center">
-                  <p className="text-[8px] font-semibold uppercase tracking-[0.15em]">
-                    <span className="text-[#C5A059]">1 Angkatan</span> · 2 Kelas · 1 Link
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -671,15 +439,13 @@ export function LandingPage() {
           <div className="absolute inset-0 bg-linear-to-b from-[#0D1B36]/10 via-[#0D1B36]/40 to-[#0D1B36]" />
           <div className="relative mx-auto flex max-w-6xl flex-col justify-center px-5 py-14 md:px-10 md:py-16">
             <h2 className="max-w-4xl text-balance text-3xl leading-[1.12] text-white md:text-5xl" style={SERIF}>
-              Mulai jual album digital premium.
-              <br />
-              <em>Bayar sekali,</em> tanpa biaya bulanan.
+              Siapkan album pertama untuk klien Anda.
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed md:text-base text-white/75">
-              Daftar gratis, publish album pertama dengan 1 Token. Klien bisa membuka akses langsung dari halaman album.
+              Publish album pertama dengan 1 Token. Klien membuka akses langsung dari halaman album.
             </p>
-              <a href="#cara-kerja" className="mt-7 inline-block w-fit rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
-                Mulai Gratis
+              <a href="#daftar" className="mt-7 inline-block w-fit rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-[#1B2A4A] transition-colors hover:bg-[#E8EEF6]">
+                Buat Album
               </a>
           </div>
         </div>
@@ -701,10 +467,10 @@ export function LandingPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Produk</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
-                <li><a href="#galeri" className="hover:text-[#2BB3D8]">Album Wedding</a></li>
-                <li><a href="#yearbook" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/55">Segera</span></a></li>
+                <li><a href="/#demo" className="hover:text-[#2BB3D8]">Album Wedding</a></li>
+                <li><a href="#" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/55">Segera</span></a></li>
                 <li><a href="#" className="hover:text-[#2BB3D8]">Link Bio</a></li>
-                <li><a href="#harga" className="hover:text-[#2BB3D8]">Harga</a></li>
+                <li><a href="/price" className="hover:text-[#2BB3D8]">Harga</a></li>
               </ul>
             </div>
             <div>
@@ -717,7 +483,7 @@ export function LandingPage() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Perusahaan</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
-                <li><a href="#faq" className="hover:text-[#2BB3D8]">FAQ</a></li>
+                <li><a href="/faq" className="hover:text-[#2BB3D8]">FAQ</a></li>
                 <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#2BB3D8]">Kontak via WhatsApp</a></li>
               </ul>
             </div>
