@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     // Custom loader: menyisipkan basePath ke src gambar public (lihat
     // images.loader.mjs). Diperlukan karena next/image tidak otomatis
     // mem-prefix basePath — tanpa ini gambar 404 di GitHub Pages (/lphvl).
+    // Loader juga mengembalikan URL yang menyertakan width agar lolos cek
+    // Next "loader does not implement width" (lihat images.loader.mjs).
     // Perhatian: loader kustom tidak bisa dipakai bersama `unoptimized`.
     loader: 'custom',
     loaderFile: './images.loader.mjs',

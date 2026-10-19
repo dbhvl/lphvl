@@ -6,10 +6,19 @@
 // LOKAL/dev: basePath kosong → src tidak berubah. Custom domain: juga kosong.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
+// Loader wajib mengembalikan URL yang BERUBAH mengikuti `width`. Jika semua
+// pemanggilan menghasilkan string identik (width diabaikan), Next memperingatkan
+// "loader does not implement width". Di host statis (GitHub Pages) query `w`/`q`
+// diabaikan dan file disajikan apa adanya — jadi srcset bervariasi secara sintaks
+// tanpa mengubah isi yang disajikan, namun tetap lolos cek Next dan basePath utuh.
 export default function imageLoader({ src, width, quality }) {
-  // Gambar di public/ disajikan apa adanya (tanpa optimasi runtime di ekspor
-  // statis) — cukup tambahkan basePath, abaikan width/quality.
-  // Hindari double-slash bila src sudah diawali basePath.
-  if (src.startsWith(basePath) && basePath !== '') return src;
-  return `${basePath}${src}`;
+  // Hindari double-slash / prefix ganda bila src sudah diawali basePath.
+  let url = src;
+  if (basePath !== '' && !src.startsWith(basePath)) {
+    url = `${basePath}${src}`;
+  }
+  const sep = url.includes('?') ? '&' : '?';
+  const params = [`w=${width}`];
+  if (quality != null) params.push(`q=${quality}`);
+  return `${url}${sep}${params.join('&')}`;
 }
