@@ -2,6 +2,11 @@ export interface FaqItem {
   id: string;
   question: string;
   answer: string;
+  /** true = tampil di /faq publik. Tanpa flag ini = spesifikasi FAQ dashboard. */
+  isPublic?: boolean;
+  /** Versi ringkas untuk /faq publik (fallback: shortAnswer / answer). */
+  publicQuestion?: string;
+  publicAnswer?: string;
   shortQuestion?: string;
   shortAnswer?: string;
   priceQuestion?: string;
@@ -18,6 +23,10 @@ export interface FaqCategory {
   id: string;
   title: string;
   description: string;
+  /** Judul aman untuk /faq publik (fallback: title). */
+  publicTitle?: string;
+  /** Deskripsi aman untuk /faq publik (fallback: description). */
+  publicDescription?: string;
   items: FaqItem[];
 }
 
@@ -26,18 +35,22 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     id: 'bisnis',
     title: 'Model Bisnis & Harga',
     description: 'Transparan tanpa langganan. Pahami alur token, aktivasi klien, dan potensi komisi Anda.',
+    publicDescription: 'Token, aktivasi, dan margin Anda.',
     items: [
       {
         id: 'biaya-bulanan',
         question: 'Apakah ada biaya bulanan atau biaya tersembunyi?',
+        isPublic: true,
+        publicQuestion: 'Apakah ada biaya langganan bulanan?',
+        publicAnswer: 'Tidak ada. Biaya fotografer hanya Token saat menerbitkan album — tanpa langganan bulanan.',
         shortQuestion: 'Apakah ada biaya bulanan?',
         priceQuestion: 'Apakah ada biaya bulanan?',
         answer:
           'Tidak ada. Satu-satunya biaya fotografer adalah Token untuk publish album (sekali potong per album, bukan langganan). Token berlaku 12 bulan sejak pembelian. Tidak ada biaya setup, tidak ada biaya penyimpanan tambahan.',
         shortAnswer:
-          'Tidak ada. Satu-satunya biaya untuk fotografer adalah Token saat album mau dipublish. Aktivasi dibayar klien — bukan Anda.',
+          'Tidak ada. Satu-satunya biaya untuk fotografer adalah Token saat album mau dipublish. Aktivasi biasanya sudah termasuk dalam paket Anda; klien juga bisa membayar langsung dari halaman album.',
         priceAnswer:
-          'Tidak ada. Satu-satunya biaya untuk fotografer adalah Token saat album mau dipublish. Aktivasi dibayar klien — bukan Anda.',
+          'Tidak ada. Satu-satunya biaya untuk fotografer adalah Token saat album mau dipublish. Aktivasi biasanya sudah termasuk dalam paket Anda; klien juga bisa membayar langsung dari halaman album.',
         isHomepage: true,
       },
       {
@@ -56,12 +69,20 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
       {
         id: 'siapa-bayar-aktivasi',
         question: 'Siapa yang bayar Aktivasi — saya atau klien?',
+        isPublic: true,
+        publicQuestion: 'Siapa yang membayar aktivasi?',
+        publicAnswer:
+          'Biasanya sudah Anda sertakan dalam paket foto, jadi klien terima beres. Klien juga bisa membayar langsung dari halaman album.',
         answer:
           'Bebas, dua-duanya bisa. Klien bisa bayar langsung dari halaman albumnya sendiri, atau Anda yang bayarkan atas nama klien (misalnya sudah termasuk paket foto Anda). Kalau klien yang bayar, Anda tetap dapat 1 Poin yang bisa ditukar jadi Token tambahan.',
       },
       {
         id: 'ambil-untung-aktivasi',
         question: 'Bisa ambil untung dari Aktivasi?',
+        isPublic: true,
+        publicQuestion: 'Bagaimana margin untuk saya?',
+        publicAnswer:
+          'Harga aktivasi adalah harga dasar. Anda bebas menetapkan harga jual sendiri — selisihnya sepenuhnya milik Anda.',
         shortQuestion: 'Bisa ambil untung dari aktivasi?',
         priceQuestion: 'Bisa ambil untung dari aktivasi?',
         answer:
@@ -78,10 +99,16 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     id: 'album-retensi',
     title: 'Album, Watermark & Retensi',
     description: 'Mekanisme preview gratis 7 hari, tier unlock section, dan durasi akses jangka panjang.',
+    publicTitle: 'Album & Watermark',
+    publicDescription: 'Pratinjau album dan watermark.',
     items: [
       {
         id: 'klien-belum-bayar',
         question: 'Apa yang terjadi kalau klien belum bayar Aktivasi?',
+        isPublic: true,
+        publicQuestion: 'Apakah klien bisa melihat album sebelum bayar?',
+        publicAnswer:
+          'Bisa. Klien melihat pratinjau album lebih dulu. Setelah aktivasi, foto tampil bersih tanpa watermark.',
         shortQuestion: 'Apakah klien bisa melihat album sebelum aktivasi?',
         priceQuestion: 'Apakah klien bisa melihat album sebelum aktivasi?',
         answer:
@@ -209,10 +236,14 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     id: 'fotografer',
     title: 'Untuk Fotografer',
     description: 'Langkah bergabung, mekanisme bonus referral, dan peluang kolaborasi partnership.',
+    publicDescription: 'Langkah bergabung dan menerbitkan album.',
     items: [
       {
         id: 'cara-mulai',
         question: 'Bagaimana cara mulai?',
+        isPublic: true,
+        publicQuestion: 'Bagaimana cara mulai menerbitkan album?',
+        publicAnswer: 'Daftar, lengkapi profil, pilih paket Token, lalu terbitkan album pertama Anda.',
         answer:
           'Daftar gratis, lengkapi profil, beli paket Token sesuai kebutuhan, langsung bisa publish album pertama.',
       },
@@ -236,6 +267,24 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     ],
   },
 ];
+
+/* Web publik = garis besar. Hanya item ber-flag isPublic yang dirender di /faq.
+   Item lain tetap tersimpan utuh sebagai spesifikasi FAQ dashboard. */
+export function getPublicFaqCategories(): FaqCategory[] {
+  return FAQ_CATEGORIES.map((cat) => ({
+    ...cat,
+    items: cat.items.filter((item) => item.isPublic === true),
+  })).filter((cat) => cat.items.length > 0);
+}
+
+/* Spesifikasi konten untuk fitur FAQ di dashboard (belum dibangun).
+   Jangan dihapus dari data — hanya tidak dirender di web publik. */
+export function getDashboardFaqCategories(): FaqCategory[] {
+  return FAQ_CATEGORIES.map((cat) => ({
+    ...cat,
+    items: cat.items.filter((item) => item.isPublic !== true),
+  })).filter((cat) => cat.items.length > 0);
+}
 
 // Helper untuk menghitung total pertanyaan FAQ di seluruh kategori secara dinamis
 export function getTotalFaqCount(): number {

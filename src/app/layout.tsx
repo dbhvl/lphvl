@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     template: '%s | Hai Velyu',
   },
   description:
-    'Tingkatkan nilai jual Anda lewat galeri album digital interaktif yang elegan. Tanpa langganan bulanan.',
+    'Album digital untuk fotografer: satu album, satu Token, tanpa langganan bulanan.',
   openGraph: {
     title: 'Hai Velyu — Solusi Album Digital Premium untuk Fotografer',
     description:
-      'Album interaktif berkualitas tinggi yang langsung meningkatkan profesionalisme.',
+      'Album digital untuk fotografer Indonesia — wedding dan yearbook. Tanpa langganan bulanan.',
     images: [
       {
         url: '/images/og-banner.jpg',

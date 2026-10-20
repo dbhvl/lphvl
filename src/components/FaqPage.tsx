@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Sun, Moon, Menu, X, ChevronDown, ArrowRight, Check } from 'lucide-react';
-import { FAQ_CATEGORIES } from '@/data/faqData';
+import { Sun, Moon, Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { getPublicFaqCategories } from '@/data/faqData';
 
-/* /faq — arsitektur meniru components/HargaPage.tsx (header/footer inline, objek
-   tema L/D, toggle tema persisten). Daftar FAQ lengkap bersumber dari
-   FAQ_CATEGORIES di data/faqData.ts. */
+/* /faq — hanya pertanyaan esensial untuk calon pengguna (garis besar).
+   Data lengkap tetap di data/faqData.ts dan dipakai sebagai spesifikasi
+   FAQ dashboard lewat getDashboardFaqCategories(). */
+const PUBLIC_FAQ_CATEGORIES = getPublicFaqCategories();
 const WHATSAPP_URL =
   'https://wa.me/6287783974066?text=Halo%20Hai%20Velyu%2C%20saya%20punya%20pertanyaan%20tentang%20platform';
 const THEME_KEY = 'hvl-theme';
@@ -34,19 +35,10 @@ const D = {
   btnPrimary: 'bg-white text-[#1B2A4A] hover:bg-[#E8EEF6]',
 };
 
-/* Masa berlaku album — fakta produk (sama dengan LIFECYCLE di HargaPage.tsx). */
-const LIFECYCLE = [
-  { when: 'Hari 0–7', title: 'Full version', desc: 'Album tayang bersih tanpa watermark — masa preview bagi klien.' },
-  { when: 'Hari 7', title: 'Watermark muncul', desc: 'Jika belum aktivasi, watermark menutup foto. Album tetap bisa dibuka.' },
-  { when: 'Hari 30', title: 'Diarsipkan', desc: 'Jika belum aktivasi, album masuk arsip.' },
-  { when: 'Hari 60', title: 'Dihapus permanen', desc: 'Jika belum aktivasi, album dihapus. Hanya data klien (nama, WA, email) yang disimpan.' },
-];
-
 export function FaqPage() {
   const [dark, setDark] = useState(false);
   const [menu, setMenu] = useState(false);
   const T = dark ? D : L;
-  const textStrong = dark ? 'text-[#E8EEF6]' : 'text-[#1B2A4A]';
   const accentHover = dark ? 'hover:text-[#2BB3D8]' : 'hover:text-[#0E7490]';
 
   useEffect(() => {
@@ -115,48 +107,25 @@ export function FaqPage() {
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#2BB3D8]">FAQ</p>
           <h1 className="mt-3 max-w-2xl text-3xl leading-tight md:text-5xl" style={SERIF}>Pertanyaan yang sering muncul.</h1>
           <p className={`mt-4 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Jawaban seputar Token, aktivasi, watermark, dan masa berlaku album.
+            Jawaban singkat seputar Token, aktivasi, dan cara mulai.
           </p>
         </div>
       </section>
 
-      {/* MASA BERLAKU ALBUM — ringkasan fakta produk */}
-      <section className={`${T.soft} px-5 py-12 md:py-16`}>
-        <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-3xl" style={SERIF}>Masa berlaku album.</h2>
-          <ol className="mt-8 grid gap-6 md:grid-cols-4">
-            {LIFECYCLE.map((s, i) => (
-              <li key={s.when} className={`border-t pt-4 ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                <p className={`flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] ${i === 0 ? 'text-[#2BB3D8]' : T.muted}`}>
-                  <span className={`h-1.5 w-1.5 rounded-full ${i === 0 ? 'bg-[#2BB3D8]' : dark ? 'bg-[#9DB0CC]' : 'bg-[#5B6B84]'}`} />
-                  {s.when}
-                </p>
-                <p className={`mt-2 text-sm font-bold ${textStrong}`}>{s.title}</p>
-                <p className={`mt-1 text-sm leading-relaxed ${T.muted}`}>{s.desc}</p>
-              </li>
-            ))}
-          </ol>
-          <p className={`mt-8 flex items-start gap-2.5 rounded-lg border p-4 text-sm leading-relaxed ${T.card}`}>
-            <Check size={16} className="mt-0.5 shrink-0 text-[#2BB3D8]" />
-            <span className={T.muted}>Selama belum aktivasi, klien menerima email pengingat otomatis di hari ke-7, 30, dan 60.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* DAFTAR FAQ LENGKAP */}
-      {FAQ_CATEGORIES.map((cat) => (
+      {/* DAFTAR FAQ ESENSIAL */}
+      {PUBLIC_FAQ_CATEGORIES.map((cat) => (
         <section key={cat.id} className="px-5 py-12 md:py-16">
           <div className="mx-auto max-w-3xl">
-            <h2 className="text-2xl md:text-3xl" style={SERIF}>{cat.title}</h2>
-            <p className={`mt-2 text-sm leading-relaxed ${T.muted}`}>{cat.description}</p>
+            <h2 className="text-2xl md:text-3xl" style={SERIF}>{cat.publicTitle || cat.title}</h2>
+            <p className={`mt-2 text-sm leading-relaxed ${T.muted}`}>{cat.publicDescription || cat.description}</p>
             <div className={`mt-6 divide-y ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
               {cat.items.map((item) => (
                 <details key={item.id} className="group py-4">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold">
-                    {item.question}
+                    {item.publicQuestion || item.question}
                     <ChevronDown size={16} className={`shrink-0 transition-transform group-open:rotate-180 ${T.muted}`} />
                   </summary>
-                  <p className={`mt-3 max-w-2xl text-sm leading-relaxed ${T.muted}`}>{item.answer}</p>
+                  <p className={`mt-3 max-w-2xl text-sm leading-relaxed ${T.muted}`}>{item.publicAnswer || item.shortAnswer || item.answer}</p>
                   {item.link && (
                     <a
                       href={item.link.href}
