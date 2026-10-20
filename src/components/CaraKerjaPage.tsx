@@ -149,6 +149,9 @@ export function CaraKerjaPage() {
             <p className={`mt-3 max-w-lg text-sm leading-relaxed md:text-base ${T.muted}`}>
               Setiap album dibuka dengan cover personal — nama couple dan tanggal — lalu tiga section terkurasi.
             </p>
+            <p className={`mt-3 max-w-lg text-sm leading-relaxed md:text-base ${T.muted}`}>
+              Folder asli tetap menyimpan file resolusi penuh — Hai Velyu adalah album yang diterima klien.
+            </p>
             <div className={`mt-6 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border px-4 py-2.5 text-sm ${T.card}`}>
               <span className={`font-semibold ${textStrong}`}>50 foto</span>
               <span className={T.muted}>·</span><span className={T.muted}>3 section</span>

@@ -89,8 +89,7 @@ function AlbumCoverPhone() {
         <PhoneChrome tone="light" />
         <div className="absolute inset-0 flex flex-col justify-end">
           <div className="px-4 pb-4 text-center text-white [text-shadow:0_1px_14px_rgba(13,27,54,0.6)]">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.3em] text-white/75">Album Wedding</p>
-            <h4 className="mt-1 text-[21px] leading-tight" style={SERIF}>
+            <h4 className="text-[21px] leading-tight" style={SERIF}>
               Raka &amp; Salsabila
             </h4>
             <p className="mt-0.5 text-[10px] font-medium text-white/80">12 April 2026</p>
@@ -127,15 +126,31 @@ function AlbumCoverPhone() {
   );
 }
 
-/* Layar galeri — Complete aktif: Section 1-2 bersih, Section 3 masih ber-watermark */
+/* Layar galeri demo — cover full-bleed di atas, Section bersih + foto ber-watermark */
 function AlbumGalleryPhone({ unlocked = false }: { unlocked?: boolean }) {
   return (
     <PhoneFrame>
-      <div className="relative aspect-[9/20] w-full bg-white">
-        <PhoneChrome tone="dark" />
-        <div className="px-4 pt-10 text-center">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#5B6B84]">Raka &amp; Salsabila</p>
-          <div className="mx-auto mt-2.5 flex w-fit gap-1 rounded-full bg-[#F6F8FB] p-1">
+      <div className="relative aspect-[9/20] w-full overflow-hidden bg-white">
+        {/* Cover — teks menimpa foto, seperti sampul album sungguhan */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0D1B36]">
+          <Image
+            src="/images/website/px-11895938-768.webp"
+            alt="Sampul album Raka dan Salsabila"
+            fill
+            sizes="320px"
+            className={`object-cover object-[50%_32%] ${GRADE}`}
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-[#0D1B36]/90 via-[#0D1B36]/25 to-[#0D1B36]/20" />
+          <PhoneChrome tone="light" />
+          <div className="absolute inset-x-0 bottom-0 px-4 pb-3 text-white [text-shadow:0_1px_12px_rgba(13,27,54,0.6)]">
+            <p className="truncate text-[16px] leading-tight" style={SERIF}>Raka &amp; Salsabila</p>
+            <p className="text-[9px] font-medium text-white/80">12 April 2026</p>
+          </div>
+        </div>
+
+        {/* Tier akses */}
+        <div className="px-4 pt-3">
+          <div className="mx-auto flex w-fit gap-1 rounded-full bg-[#F6F8FB] p-1">
             {['Highlight', 'Complete', 'Full Access'].map((t, i) => (
               <span
                 key={t}
@@ -146,22 +161,18 @@ function AlbumGalleryPhone({ unlocked = false }: { unlocked?: boolean }) {
             ))}
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-2 gap-1 px-1">
-          <div className="relative aspect-square overflow-hidden">
-            <Image src="/images/website/pexels-11895939.jpg" alt="Momen couple berpegangan tangan" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
-          </div>
-          <div className="flex aspect-square items-center justify-center bg-[#F6F8FB]">
-            <p className="text-[10px] font-semibold text-[#5B6B84]">+42 foto</p>
-          </div>
+
+        {/* Grid foto */}
+        <div className="mt-2.5 grid grid-cols-2 gap-1 px-1">
           <div className="relative aspect-square overflow-hidden">
             <Image src="/images/website/pexels-11600628.jpg" alt="Detail dekorasi pernikahan" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
           </div>
           <div className="relative aspect-square overflow-hidden">
             <Image src="/images/website/pexels-26653479.jpg" alt="Momen hangat resepsi" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
           </div>
-          {['/images/website/px-11895938-768.webp', '/images/website/pexels-10074148.jpg'].map((src) => (
+          {['/images/website/pexels-11895939.jpg', '/images/website/pexels-10074148.jpg'].map((src) => (
             <div key={src} className="relative aspect-square overflow-hidden">
-              <Image src={src} alt="Foto Section 3 yang masih terkunci" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
+              <Image src={src} alt="Foto yang masih ber-watermark" width={244} height={244} className={`h-full w-full object-cover ${GRADE}`} />
               <div className={`pointer-events-none absolute inset-0 transition-opacity duration-700 ${unlocked ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="absolute inset-0 bg-[#0D1B36]/35" />
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-12 rounded-sm border border-white/60 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-[0.25em] text-white">
@@ -172,6 +183,7 @@ function AlbumGalleryPhone({ unlocked = false }: { unlocked?: boolean }) {
             </div>
           ))}
         </div>
+        <p className="mt-3 text-center text-[9px] font-semibold uppercase tracking-[0.16em] text-[#5B6B84]">50 foto · 3 section</p>
         <div className="absolute inset-x-0 bottom-0 border-t border-[#E2E8F0] bg-white/95 px-4 pb-5 pt-2.5">
           <div className="rounded-xl bg-[#1B2A4A] py-2.5 text-center text-[11px] font-semibold text-white">
             {unlocked ? 'Full Access terbuka' : 'Buka Full Access · Rp45.000'}
@@ -306,7 +318,7 @@ export function LandingPage() {
               Platform album untuk fotografer Indonesia
             </p>
             <h1 className="max-w-xl text-[30px] leading-[1.15] text-white md:max-w-2xl md:text-[48px] md:leading-[1.08]" style={SERIF}>
-              Album digital yang terasa sebagai hadiah.
+              Buat album foto menjadi lebih bernilai.
             </h1>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75 md:text-base">
               Susun foto wedding dalam album ber-cover, lalu kirim satu link yang siap dibuka klien dari HP.
@@ -356,32 +368,30 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* CARA KERJA */}
+      {/* CARA KERJA — kerangka 3 langkah; detail lengkap di /cara-kerja */}
       <section id="cara-kerja" className="px-5 py-14 md:py-20">
         <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Susun. Publish. Serahkan.</h2>
-          <p className={`mt-3 max-w-lg text-sm leading-relaxed ${T.muted}`}>
-            Tanpa kurva belajar. Semua bisa diselesaikan dari HP — album pertama tayang dalam hitungan menit.
-          </p>
-          <div className="mt-12 max-w-2xl">
+          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
+            <div>
+              <h2 className="text-2xl md:text-4xl" style={SERIF}>Susun. Publish. Serahkan.</h2>
+              <p className={`mt-2 text-sm ${T.muted}`}>Tiga langkah, semuanya bisa dari HP.</p>
+            </div>
+            <a href="/cara-kerja" className={`inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
+              Pelajari cara kerjanya <ArrowRight size={14} />
+            </a>
+          </div>
+          <div className={`mt-8 grid grid-cols-3 divide-x overflow-hidden rounded-2xl border ${T.card} ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
             {[
-              { n: '01', t: 'Daftar gratis', d: 'Buat akun, lengkapi profil studio Anda. Gratis — tanpa kartu kredit.', ind: '' },
-              { n: '02', t: 'Upload & susun', d: 'Masukkan foto terbaik ke 3 section kurasi. Kapasitas tiap section terjaga — album tetap kurasi, bukan gudang.', ind: 'md:pl-8' },
-              { n: '03', t: 'Publish & bagikan', d: '1\u00A0Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
+              { n: '01', t: 'Daftar gratis' },
+              { n: '02', t: 'Upload & susun' },
+              { n: '03', t: 'Publish & bagikan' },
             ].map((s) => (
-              <div key={s.n} className={`border-t pt-5 pb-8 last:pb-0 ${s.ind} ${dark ? 'border-[#27395C]' : 'border-[#E2E8F0]'}`}>
-                <p className={`text-4xl ${textStrong}`} style={SERIF}>{s.n}</p>
-                <h3 className="mt-3 text-base font-bold md:text-lg">{s.t}</h3>
-                <p className={`mt-2 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>{s.d}</p>
+              <div key={s.n} className="px-3 py-5 md:px-6 md:py-6">
+                <p className={`text-lg md:text-2xl ${textStrong}`} style={SERIF}>{s.n}</p>
+                <p className="mt-1.5 text-xs leading-snug font-semibold md:text-sm">{s.t}</p>
               </div>
             ))}
           </div>
-          <p className={`mt-8 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Folder tetap menyimpan file resolusi penuh. Hai Velyu menjadi album yang diterima klien.
-          </p>
-          <a href="/cara-kerja" className={`mt-6 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
-            Pelajari cara kerjanya <ArrowRight size={14} />
-          </a>
         </div>
       </section>
 
