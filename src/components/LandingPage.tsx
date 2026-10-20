@@ -435,6 +435,47 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* YEARBOOK — lini musiman (setahun sekali). Kartu mock compact. */}
+      <section id="yearbook" className="px-5 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl md:grid md:grid-cols-[1fr_240px] md:items-center md:gap-12">
+          <div>
+            <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Produk · Segera hadir</p>
+            <h2 className="mt-3 max-w-xl text-2xl md:text-4xl" style={SERIF}>Album kenangan kelulusan.</h2>
+            <p className={`mt-4 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>
+              Yearbook digital untuk fotografer sekolah. Satu album untuk satu angkatan — kenangan kelulusan bisa dibuka langsung dari HP. Nilai tambah baru untuk paket kelulusan Anda.
+            </p>
+            <p className={`mt-2 text-xs ${T.muted}`}>Lini musiman — setahun sekali</p>
+            <a href={WHATSAPP_URL + '%20Saya%20tertarik%20dengan%20album%20yearbook'} target="_blank" rel="noopener noreferrer"
+              className={`mt-6 inline-flex items-center gap-1.5 border-b pb-0.5 text-sm font-semibold transition-colors ${dark ? 'border-[#27395C]' : 'border-[#1B2A4A]/30'} hover:border-[#2BB3D8] hover:text-[#2BB3D8]`}>
+              Tanya dulu <ArrowRight size={14} />
+            </a>
+          </div>
+          <div className="mt-10 md:mt-0">
+            <div className="mx-auto w-full max-w-60 border border-[#C5A059]/25 bg-[#0A0A0A] text-[#E8DEC8]">
+              <div className="relative h-24 overflow-hidden">
+                <Image src="/images/yearbook/school-cover.jpg" alt="Sampul album yearbook" width={1200} height={800} className="h-full w-full object-cover opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+              </div>
+              <div className="px-4 pb-4 pt-2 text-center">
+                <p className="text-base leading-snug" style={SERIF}>SMKN 1 Bawang</p>
+                <p className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.25em] text-[#C5A059]">Angkatan 2026</p>
+                <div className="mt-3 grid grid-cols-4 gap-0.75">
+                  {['student-01','student-02','student-03','student-04','student-05','student-06','student-07','student-08'].map((f) => (
+                    <div key={f} className="aspect-square overflow-hidden bg-[#1A1A1A]">
+                      <Image src={`/images/yearbook/${f}.jpg`} alt="Foto siswa" width={400} height={400} className="h-full w-full object-cover opacity-85" />
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 border-t border-[#C5A059]/20 pt-2 text-center">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.15em]"><span className="text-[#C5A059]">1 Angkatan</span> · 2 Kelas · 1 Link</p>
+                </div>
+              </div>
+            </div>
+            <p className={`mt-3 text-center text-[10px] uppercase tracking-[0.18em] ${T.muted}`}>Tampilan album yearbook</p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA AKHIR */}
       <section className="relative">
         <div className="relative overflow-hidden min-h-105 md:min-h-130">
@@ -478,7 +519,7 @@ export function LandingPage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-white/50">Produk</p>
               <ul className="mt-3 space-y-2 text-sm text-white/75">
                 <li><a href="/#demo" className="hover:text-[#2BB3D8]">Album Wedding</a></li>
-                <li><a href="#" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/55">Segera</span></a></li>
+                <li><a href="#yearbook" className="hover:text-[#2BB3D8]">Yearbook <span className="ml-1 text-[10px] uppercase text-white/55">Segera</span></a></li>
                 <li><a href="#" className="hover:text-[#2BB3D8]">Link Bio</a></li>
                 <li><a href="/price" className="hover:text-[#2BB3D8]">Harga</a></li>
               </ul>
