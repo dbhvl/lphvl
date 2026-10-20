@@ -360,37 +360,31 @@ export function LandingPage() {
               <span className={T.muted}>·</span><span className={T.muted}>3 section</span>
               <span className={T.muted}>·</span><span className={T.muted}>1 link</span>
             </div>
+            <div id="cara-kerja" className={`mt-8 border-t pt-6 ${T.line}`}>
+              <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${T.muted}`}>Cara kerja</p>
+              <ol className="mt-3 space-y-2.5">
+                {[
+                  { n: '01', t: 'Daftar gratis', d: 'Buat akun dan profil studio — tanpa kartu kredit.' },
+                  { n: '02', t: 'Upload & susun', d: 'Pilih foto terbaik ke 3 section kurasi.' },
+                  { n: '03', t: 'Publish & bagikan', d: '1 Token menerbitkan album; bagikan satu link.' },
+                ].map((s) => (
+                  <li key={s.n} className="flex gap-3">
+                    <span className={`w-5 shrink-0 text-sm ${textStrong}`} style={SERIF}>{s.n}</span>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold">{s.t}</span>
+                      <span className={`block text-xs leading-relaxed ${T.muted}`}>{s.d}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              <a href="/cara-kerja" className={`mt-4 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
+                Pelajari cara kerjanya <ArrowRight size={14} />
+              </a>
+            </div>
           </div>
-          <div className="mx-auto w-full max-w-65 md:max-w-90">
+          <div className="mx-auto w-full max-w-65 md:max-w-75">
             <AlbumCoverPhone />
             <p className={`mt-4 text-center text-[11px] uppercase tracking-[0.14em] ${T.muted}`}>Tampilan album di ponsel klien</p>
-          </div>
-        </div>
-      </section>
-
-      {/* CARA KERJA — kerangka 3 langkah; detail lengkap di /cara-kerja */}
-      <section id="cara-kerja" className="px-5 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
-            <div>
-              <h2 className="text-2xl md:text-4xl" style={SERIF}>Susun. Publish. Serahkan.</h2>
-              <p className={`mt-2 text-sm ${T.muted}`}>Tiga langkah, semuanya bisa dari HP.</p>
-            </div>
-            <a href="/cara-kerja" className={`inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
-              Pelajari cara kerjanya <ArrowRight size={14} />
-            </a>
-          </div>
-          <div className={`mt-8 grid grid-cols-3 divide-x overflow-hidden rounded-2xl border ${T.card} ${dark ? 'divide-[#27395C]' : 'divide-[#E2E8F0]'}`}>
-            {[
-              { n: '01', t: 'Daftar gratis' },
-              { n: '02', t: 'Upload & susun' },
-              { n: '03', t: 'Publish & bagikan' },
-            ].map((s) => (
-              <div key={s.n} className="px-3 py-5 md:px-6 md:py-6">
-                <p className={`text-lg md:text-2xl ${textStrong}`} style={SERIF}>{s.n}</p>
-                <p className="mt-1.5 text-xs leading-snug font-semibold md:text-sm">{s.t}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -410,6 +404,15 @@ export function LandingPage() {
             >
               {unlocked ? 'Kunci kembali' : 'Aktivasi Full Access'}
             </button>
+            <div className={`mt-8 border-t pt-6 ${T.line}`}>
+              <h3 className="text-sm font-semibold">Satu album, dua pilihan Aktivasi.</h3>
+              <p className={`mt-1.5 max-w-sm text-xs leading-relaxed ${T.muted}`}>
+                Sertakan Aktivasi dalam paket Anda, atau biarkan klien membayar langsung — mulai Rp15.000.
+              </p>
+              <a href="/price" className={`mt-3 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
+                Lihat harga &amp; pilihan akses <ArrowRight size={14} />
+              </a>
+            </div>
           </div>
           <div className="mx-auto w-full max-w-85">
             <AlbumGalleryPhone unlocked={unlocked} />
@@ -417,31 +420,13 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* PEMBAYARAN — ringkas; detail tier & margin di /price */}
-      <section className={`${T.soft} px-5 py-14 md:py-20`}>
-        <div className="mx-auto max-w-6xl">
-          <h2 className="max-w-xl text-2xl md:text-4xl" style={SERIF}>Satu album, dua pilihan Aktivasi.</h2>
-          <p className={`mt-3 max-w-lg text-sm leading-relaxed md:text-base ${T.muted}`}>
-            Sertakan Aktivasi dalam paket Anda, atau biarkan klien membayar langsung.
-          </p>
-          <div className={`mt-6 inline-flex items-center gap-x-3 rounded-lg border px-4 py-2.5 text-sm ${T.card}`}>
-            <span className={`font-semibold ${textStrong}`}>Aktivasi mulai Rp15.000</span>
-          </div>
-          <div>
-            <a href="/price" className={`mt-6 inline-flex items-center gap-1.5 text-sm font-semibold ${accentLink} hover:underline`}>
-              Lihat harga &amp; pilihan akses <ArrowRight size={14} />
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* YEARBOOK — lini musiman (setahun sekali). Kartu mock compact. */}
       <section id="yearbook" className="px-5 py-14 md:py-20">
-        <div className="mx-auto max-w-6xl md:grid md:grid-cols-[1fr_240px] md:items-center md:gap-12">
+        <div className="mx-auto max-w-5xl md:grid md:grid-cols-[1fr_280px] md:items-center md:gap-12 lg:grid-cols-[1fr_340px] lg:gap-14">
           <div>
             <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${T.muted}`}>Produk · Segera hadir</p>
             <h2 className="mt-3 max-w-xl text-2xl md:text-4xl" style={SERIF}>Album kenangan kelulusan.</h2>
-            <p className={`mt-4 max-w-md text-sm leading-relaxed md:text-base ${T.muted}`}>
+            <p className={`mt-4 max-w-xl text-sm leading-relaxed md:text-base ${T.muted}`}>
               Yearbook digital untuk fotografer sekolah. Satu album untuk satu angkatan — kenangan kelulusan bisa dibuka langsung dari HP. Nilai tambah baru untuk paket kelulusan Anda.
             </p>
             <p className={`mt-2 text-xs ${T.muted}`}>Lini musiman — setahun sekali</p>
@@ -451,8 +436,8 @@ export function LandingPage() {
             </a>
           </div>
           <div className="mt-10 md:mt-0">
-            <div className="mx-auto w-full max-w-60 border border-[#C5A059]/25 bg-[#0A0A0A] text-[#E8DEC8]">
-              <div className="relative h-24 overflow-hidden">
+            <div className="mx-auto w-full max-w-85 border border-[#C5A059]/25 bg-[#0A0A0A] text-[#E8DEC8]">
+              <div className="relative h-28 overflow-hidden">
                 <Image src="/images/yearbook/school-cover.jpg" alt="Sampul album yearbook" width={1200} height={800} className="h-full w-full object-cover opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
               </div>
