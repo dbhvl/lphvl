@@ -66,18 +66,18 @@ function PhoneChrome({ tone }: { tone: 'light' | 'dark' }) {
   );
 }
 
-/* 15 + 20 + 15 = 50 foto — harus cocok dengan klaim "Semua 50 foto" di /price */
+/* 15 + 15 + 20 = 50 foto — harus cocok dengan klaim "Semua 50 foto" di /price */
 const ALBUM_SECTIONS = [
   { src: '/images/website/pexels-11600628.jpg', title: 'Section 1 · Akad', count: '15 foto', open: true },
-  { src: '/images/website/pexels-26653479.jpg', title: 'Section 2 · Resepsi', count: '20 foto', open: false },
-  { src: '/images/website/pexels-11895939.jpg', title: 'Section 3 · Portret', count: '15 foto', open: false },
+  { src: '/images/website/pexels-26653479.jpg', title: 'Section 2 · Resepsi', count: '15 foto', open: false },
+  { src: '/images/website/pexels-11895939.jpg', title: 'Section 3 · Portret', count: '20 foto', open: false },
 ];
 
 /* Layar sampul — yang dilihat klien begitu membuka link album */
 function AlbumCoverPhone() {
   return (
     <PhoneFrame>
-      <div className="relative aspect-[9/20] w-full bg-[#0D1B36]">
+      <div className="relative aspect-9/20 w-full bg-[#0D1B36]">
         <Image
           src="/images/website/px-11895938-768.webp"
           alt="Sampul album: pengantin berhadapan"
@@ -94,7 +94,7 @@ function AlbumCoverPhone() {
             </h4>
             <p className="mt-0.5 text-[10px] font-medium text-white/80">12 April 2026</p>
           </div>
-          <div className="rounded-t-[1.5rem] bg-white px-4 pb-6 pt-2 shadow-[0_-8px_24px_rgba(13,27,54,0.25)]">
+          <div className="rounded-t-3xl bg-white px-4 pb-6 pt-2 shadow-[0_-8px_24px_rgba(13,27,54,0.25)]">
             <div className="mx-auto h-1 w-9 rounded-full bg-[#E2E8F0]" />
             <div className="mt-3.5 space-y-2.5">
               {ALBUM_SECTIONS.map((s) => (
@@ -130,9 +130,9 @@ function AlbumCoverPhone() {
 function AlbumGalleryPhone({ unlocked = false }: { unlocked?: boolean }) {
   return (
     <PhoneFrame>
-      <div className="relative aspect-[9/20] w-full overflow-hidden bg-white">
+      <div className="relative aspect-9/20 w-full overflow-hidden bg-white">
         {/* Cover — teks menimpa foto, seperti sampul album sungguhan */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#0D1B36]">
+        <div className="relative aspect-16/10 w-full overflow-hidden bg-[#0D1B36]">
           <Image
             src="/images/website/px-11895938-768.webp"
             alt="Sampul album Raka dan Salsabila"

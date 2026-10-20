@@ -19,19 +19,20 @@ _Dokumen keputusan hasil diskusi Sam ↔ Cline ↔ masukan ChatGPT, 19 Okt 2026.
 **Mengapa TIDAK pakai pola "Anda ___. Kami ___." ( ShootProof) sebagai suara utama:** di **bahasa Indonesia** pola itu justru menjadi **klise slogan agensi** ("Anda mengabadikan momen, kami merawat kenangannya") — menukar satu template dengan template lain, dan identitasnya berasal dari kompetitor, bukan mekanisme khas Hai Velyu.
 
 ## 3. Keputusan editorial (yang diadopsi)
-1. **Motif emosional = "hadiah".** Benang tipis; **jangan diulang di tiap section**. Setelah headline emosional, subheadline langsung konkret.
+1. **Motif = "bernilai"** (echo brand **High Value → Hai Velyu**; sebelumnya "hadiah" — diganti atas permintaan Sam, 19 Okt 2026). Benang tipis; **jangan diulang di tiap section**. Setelah headline, subheadline langsung konkret.
 2. **Alur verbal = "Susun. Publish. Serahkan."** → dipakai **SEKALI** sebagai headline Cara Kerja. "Serahkan" penting: menandai album = produk jadi untuk klien, bukan software. **Jangan** diulang sebagai motif berulang.
 3. **Hindari negasi "X, bukan Y".** Kata **"folder"** boleh dipakai **1×** sebagai pembagian fungsi (bukan slogan): *"Folder tetap menyimpan file resolusi penuh. Hai Velyu menjadi album yang diterima klien."*
 4. **Hapus klaim abstrak:** "membuat klien terkesan", "menaikkan nilai jual", "meningkatkan profesionalisme".
-5. **Hero dipertahankan** (headline sudah kuat):
-   > **Album digital yang terasa sebagai hadiah.**
+5. **Hero DIUBAH** (permintaan Sam, 19 Okt 2026):
+   > **Buat album foto menjadi lebih bernilai.**
+   > *Alasan Sam: "…terasa sebagai hadiah" terasa seperti terjemahan Inggris & aneh bagi pembaca Indonesia; "bernilai" selaras brand **Hai Velyu Studio = "High Value"** → Hai Velyu.*
    > Susun foto wedding dalam album ber-cover, lalu kirim satu link yang siap dibuka klien dari HP.
    > **Buat Album** · **Lihat Demo**
 6. **Section pembayaran = "dua pilihan Aktivasi"** (lebih akurat PRD, memperbaiki copy lama yang condong "klien membayar"):
    > **Satu album, dua pilihan Aktivasi.** Sertakan Aktivasi dalam paket Anda, atau biarkan klien membayar langsung. → **Lihat harga →**
 
 ## 4. Struktur final — 6 blok
-1. **Hero** — "Album digital yang terasa sebagai hadiah." + subhead konkret.
+1. **Hero** — "Buat album foto menjadi lebih bernilai." + subhead konkret.
 2. **Tampilan produk** — "Dibuka dengan nama mereka." · bukti: `50 foto · 3 section · 1 link`.
 3. **Cara kerja** — "Susun. Publish. Serahkan." · tautan "Pelajari cara kerjanya →".
 4. **Demo** — "Buka seperti klien Anda." · **DEMO unlock interaktif tetap jadi pusat**.

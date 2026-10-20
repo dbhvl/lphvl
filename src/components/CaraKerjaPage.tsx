@@ -39,11 +39,11 @@ const STEPS = [
   { n: '03', t: 'Publish & bagikan', d: '1\u00A0Token mempublish album. Bagikan link — atau cetak QR souvenir untuk kado klien.', ind: 'md:pl-16' },
 ];
 
-/* Struktur section album — salinan ALBUM_SECTIONS di LandingPage.tsx (15+20+15 = 50). */
+/* Struktur section album — salinan ALBUM_SECTIONS di LandingPage.tsx (15+15+20 = 50). */
 const STRUKTUR = [
   { title: 'Section 1 · Akad', count: '15 foto' },
-  { title: 'Section 2 · Resepsi', count: '20 foto' },
-  { title: 'Section 3 · Portret', count: '15 foto' },
+  { title: 'Section 2 · Resepsi', count: '15 foto' },
+  { title: 'Section 3 · Portret', count: '20 foto' },
 ];
 
 /* Masa berlaku album — versi ringkas; fakta sama dengan LIFECYCLE di HargaPage.tsx. */
