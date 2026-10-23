@@ -1,0 +1,17 @@
+================================================================================
+  FILE INI BERISI PERINTAH UNTUK CLONE ULANG REPOSITORI GITHUB
+  Repository: https://github.com/dbhvl/lphvl.git
+================================================================================
+
+Jika suatu saat Anda ingin membuka ulang proyek ini, jalankan perintah berikut
+di dalam folder ini (atau folder tujuan lain):
+
+    git clone https://github.com/dbhvl/lphvl.git
+
+Catatan:
+- Pastikan Anda login dengan akun GitHub yang memiliki akses ke repo ini
+  (karena Anda memiliki lebih dari satu akun GitHub).
+- Jika diminta username/password atau token, gunakan kredensial akun yang benar.
+- Setelah clone selesai, masuk ke folder hasil clone lalu buka proyeknya.
+
+================================================================================
