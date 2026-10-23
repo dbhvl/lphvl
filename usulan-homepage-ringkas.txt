@@ -1,0 +1,127 @@
+USULAN HOMEPAGE RINGKAS — HAI VELYU
+
+Tujuan homepage:
+Homepage tidak perlu menjelaskan seluruh sistem. Tugas utamanya adalah membuat pengunjung cepat memahami apa itu Hai Velyu dan tertarik melihat lebih lanjut.
+
+Detail Token, Aktivasi, tier, retensi, dan skema pembayaran sebaiknya dipindahkan ke halaman terpisah seperti Cara Kerja, Harga, dan FAQ.
+
+
+1. HERO
+
+Headline:
+Serahkan foto sebagai album digital.
+
+Subheadline:
+Untuk fotografer wedding dan yearbook. Buat album ber-cover, bagikan satu link, lalu buka langsung dari HP.
+
+CTA utama:
+Buat Album
+
+CTA sekunder:
+Lihat Demo
+
+Hero harus langsung menjawab:
+- Apa produknya: album digital
+- Untuk siapa: fotografer wedding dan yearbook
+- Bagaimana digunakan: dibagikan melalui satu link
+
+Token dan Aktivasi belum perlu dijelaskan di hero.
+
+
+2. PEMBEDA UTAMA
+
+Headline:
+Bukan sekadar folder foto.
+
+Deskripsi:
+Cover personal, foto tersusun dalam section, dan satu link yang siap diberikan kepada klien.
+
+Tiga poin:
+- Nyaman dibuka dari HP
+- File resolusi penuh tetap di Google Drive
+- Aktivasi bisa dibayar fotografer atau klien
+
+
+3. CARA KERJA
+
+Headline:
+Buat. Publish. Bagikan.
+
+Langkah:
+1. Susun foto
+2. Publish dengan 1 Token
+3. Serahkan album kepada klien
+
+Tautan:
+Pelajari cara kerjanya →
+
+
+4. DEMO ALBUM
+
+Headline:
+Lihat dari sisi klien.
+
+Deskripsi:
+Coba buka album dan lihat bagaimana Aktivasi bekerja.
+
+CTA:
+Buka Demo Album
+
+Bagian ini tidak membutuhkan paragraf penjelasan panjang. Visual album dan interaksi demo menjadi penjelasan utamanya.
+
+
+5. RINGKASAN HARGA
+
+Headline:
+Tanpa biaya bulanan.
+
+Deskripsi:
+Fotografer menggunakan Token untuk publish. Aktivasi dapat dibayar fotografer atau klien.
+
+Tautan:
+Lihat harga dan pilihan akses →
+
+
+6. CTA AKHIR
+
+Headline:
+Buat album pertama untuk klien Anda.
+
+CTA:
+Mulai Gratis
+
+
+BAGIAN YANG SEBAIKNYA DIPINDAHKAN DARI HOMEPAGE
+
+- Kartu lengkap tiga tier
+- Penjelasan margin
+- Retensi album
+- Masa preview tujuh hari
+- Penjelasan watermark secara mendetail
+- Semua FAQ
+- Detail lengkap Token
+- Mekanisme pencairan
+- Penjelasan lengkap Yearbook
+
+Homepage cukup memberikan tautan menuju:
+- Cara Kerja
+- Harga
+- FAQ
+- Yearbook
+
+
+PRINSIP COPYWRITING
+
+Gunakan pola:
+Satu kalimat utama + satu kalimat penjelas + satu tindakan.
+
+Hindari paragraf yang mencoba menjawab semua keberatan sebelum pengunjung memiliki keberatan.
+
+Homepage sebaiknya berfungsi sebagai pintu masuk, bukan manual produk.
+
+
+RINGKASAN POSITIONING
+
+Hai Velyu membantu fotografer menyerahkan hasil foto sebagai album digital yang lebih rapi dan mudah dibuka klien.
+
+Fotografer menyusun dan menerbitkan album. Klien menerima satu link album yang bisa dibuka dari HP. Aktivasi dapat dibayar fotografer sebagai bagian dari paket atau dibayar langsung oleh klien.

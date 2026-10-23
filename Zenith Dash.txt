@@ -1,0 +1,110 @@
+# Zenith Dash
+
+A visually stunning and highly performant e-commerce analytics dashboard providing key business insights at a glance for 'Casa Carigar'.
+
+[cloudflarebutton]
+
+Zenith Dash is an information-dense and performant e-commerce dashboard. It provides a comprehensive, at-a-glance overview of key business metrics, including sales performance, revenue trends, customer acquisition, and product analytics. The dashboard is designed with a focus on visual excellence and intuitive user experience, featuring interactive charts, detailed data tables, and key performance indicator (KPI) cards. Built on Cloudflare's serverless infrastructure, it ensures lightning-fast load times and real-time data presentation. The user interface is meticulously crafted to be both beautiful and functional, allowing stakeholders to make data-driven decisions effortlessly.
+
+## Key Features
+
+- **Comprehensive Analytics:** At-a-glance overview of sales, revenue, customers, and product performance.
+- **Interactive Visualizations:** Beautiful, responsive charts powered by Recharts for intuitive data exploration.
+- **Modern UI/UX:** A sophisticated, dark-themed interface built with shadcn/ui and Tailwind CSS for a premium user experience.
+- **High Performance:** Built on Cloudflare Workers and Durable Objects for lightning-fast, serverless performance at the edge.
+- **Responsive Design:** Flawless layout and functionality across all devices, from mobile to desktop.
+- **Real-time Data:** Designed to present up-to-date metrics for timely, data-driven decisions.
+
+## Technology Stack
+
+- **Frontend:** React, Vite, TypeScript, Tailwind CSS
+- **UI Components:** shadcn/ui, Radix UI
+- **Data Visualization:** Recharts
+- **State Management:** Zustand
+- **Routing:** React Router
+- **Animations:** Framer Motion
+- **Backend:** Hono on Cloudflare Workers
+- **Storage:** Cloudflare Durable Objects
+- **Tooling:** Bun, Wrangler CLI, ESLint
+
+## Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or later)
+- [Bun](https://bun.sh/) package manager
+- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/) logged into your Cloudflare account.
+
+```bash
+bun install -g wrangler
+wrangler login
+```
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/zenith_dash.git
+    cd zenith_dash
+    ```
+
+2.  **Install dependencies:**
+    This project uses Bun for package management.
+    ```bash
+    bun install
+    ```
+
+## Development
+
+To start the local development server, which includes both the Vite frontend and the Hono backend on the same port with hot-reloading:
+
+```bash
+bun dev
+```
+
+The application will be available at `http://localhost:3000` (or the port specified in your environment).
+
+### Available Scripts
+
+- `bun dev`: Starts the local development server.
+- `bun build`: Builds the frontend application and the worker for production.
+- `bun deploy`: Deploys the application to your Cloudflare account.
+- `bun lint`: Lints the codebase using ESLint.
+
+## Deployment
+
+This project is configured for seamless deployment to Cloudflare's serverless platform.
+
+1.  **Build the project:**
+    Ensure all your changes are committed and run the build command:
+    ```bash
+    bun build
+    ```
+
+2.  **Deploy to Cloudflare:**
+    Use the `deploy` script, which utilizes Wrangler to publish your application.
+    ```bash
+    bun deploy
+    ```
+
+Alternatively, you can deploy your own version of this project with a single click.
+
+[cloudflarebutton]
+
+## Project Structure
+
+The codebase is organized into three main directories:
+
+-   `src/`: Contains the entire React frontend application, including pages, components, hooks, and utility functions.
+-   `worker/`: Contains the Hono backend application that runs on Cloudflare Workers, including API routes and entity definitions for Durable Objects.
+-   `shared/`: Contains TypeScript types and mock data shared between the frontend and backend to ensure type safety.
+
+## Contributing
+
+Contributions are welcome! Please feel free to open an issue or submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.

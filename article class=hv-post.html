@@ -1,0 +1,256 @@
+<article class="hv-post">
+  <style>
+    .hv-post{
+      --primary:#1E3A8A;
+      --accent:#06B6D4;
+      --dark:#0f172a;
+      --gray:#475569;
+      --muted:#64748b;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--dark);
+      line-height: 1.8;
+    }
+    .hv-wrap{ max-width: 860px; margin: 0 auto; padding: 18px 16px 32px; }
+
+    .hv-kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 6px 10px;
+      background: rgba(6,182,212,.12);
+      color: #0e7490;
+      border: 1px solid rgba(6,182,212,.25);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      margin-bottom: 14px;
+    }
+    .hv-title{
+      font-size: 34px; line-height: 1.2;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 10px;
+      color: var(--dark);
+    }
+    .hv-subtitle{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .hv-hero{
+      background: linear-gradient(135deg, rgba(30,58,138,.08), rgba(6,182,212,.10));
+      border: 1px solid rgba(30,58,138,.15);
+      border-radius: 16px;
+      padding: 12px;
+      margin: 18px 0 22px;
+    }
+    .hv-hero figure{ margin:0; }
+    .hv-hero img{
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display:block;
+      background:#eef2ff;
+    }
+    .hv-caption{ margin-top: 10px; font-size: 13px; color: var(--muted); text-align:center; }
+
+    .hv-card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin: 14px 0;
+      box-shadow: 0 4px 18px rgba(2,6,23,.05);
+    }
+    .hv-lead{ font-size: 16px; color: var(--gray); margin: 0; }
+    .hv-highlight{
+      border-left: 5px solid var(--accent);
+      background: rgba(6,182,212,.08);
+      padding: 14px 14px;
+      border-radius: 12px;
+      margin: 16px 0;
+      color: var(--gray);
+    }
+    .hv-h2{
+      margin: 22px 0 10px;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .hv-h3{
+      margin: 16px 0 8px;
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--dark);
+    }
+    .hv-ul{ margin: 10px 0 0 0; padding-left: 18px; color: var(--gray); }
+    .hv-ul li{ margin: 8px 0; }
+    .hv-tag{
+      display:inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(30,58,138,.08);
+      border: 1px solid rgba(30,58,138,.16);
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-right: 8px;
+    }
+
+    .hv-check{ list-style: none; padding-left: 0; margin: 10px 0 0; }
+    .hv-check li{
+      display:flex; gap:10px; align-items:flex-start;
+      margin: 10px 0;
+      color: var(--gray);
+    }
+    .hv-check .dot{
+      flex: 0 0 auto;
+      width: 22px; height: 22px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(6,182,212,.14);
+      border: 1px solid rgba(6,182,212,.35);
+      color: #0e7490;
+      font-weight: 900;
+      margin-top: 2px;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .hv-cta{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .hv-btn-primary{
+      display:inline-block;
+      background: var(--accent);
+      color: #fff !important;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 900;
+      text-decoration:none;
+      box-shadow: 0 10px 20px rgba(6,182,212,.25);
+    }
+    .hv-btn-secondary{
+      display:inline-block;
+      background: #fff;
+      color: var(--primary) !important;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 900;
+      text-decoration:none;
+      border: 1px solid rgba(30,58,138,.22);
+    }
+    .hv-note{ font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+    @media (max-width: 520px){
+      .hv-title{ font-size: 28px; }
+      .hv-wrap{ padding: 16px 14px 28px; }
+    }
+  </style>
+
+  <div class="hv-wrap">
+    <div class="hv-kicker">✅ Praktis untuk Pemilik Rental (WA-first)</div>
+    <p class="hv-subtitle">
+      Cocok untuk rental mobil yang promosi lewat <strong>WhatsApp</strong>, <strong>Google Maps</strong>, dan <strong>Instagram</strong>.
+      Fokusnya satu: bikin orang baru yakin sewa, lalu chat Anda.
+    </p>
+
+<div class="hv-hero">
+  <figure style="margin: 0px;">
+    <img alt="7 cara bikin calon penyewa rental mobil percaya" decoding="async" height="358" loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFz7ONr-FCunhcgeBXyH_zOqny5R2Z_gKRT28pSqIVY-VKKNB2OgIdqnmUG4glPoIRbfXtKDk-NwfMtaq5h73iDSNaIG-HOWvEq_v78NzQycmH3vxvu0bA3h0A1gVAdnakm14uFijKg52w0yrePkgFo0RxHp0VZbqLiIK0H1HuuCLkRRo16KZVhHV5cBU/w640-h358/7%20cara%20bikin%20calon%20penyewa%20rental%20mobil%20percaya.png" style="border-radius: 12px; display: block; height: auto; width: 100%;" width="640" />
+    <figcaption class="hv-caption">
+      Ilustrasi sistem rental mobil
+    </figcaption>
+  </figure>
+</div>
+
+
+    <div class="hv-card">
+      <p class="hv-lead">
+        Banyak rental mobil itu bukan kalah armada, tapi kalah <strong>kepercayaan</strong>.
+        Calon penyewa yang baru kenal biasanya mikir: “Ini beneran? Ada alamatnya? Respon cepat nggak? Mobilnya ready nggak?”
+      </p>
+
+      <div class="hv-highlight">
+        <strong>Targetnya bukan “langsung closing”.</strong><br />
+        Targetnya: bikin calon penyewa merasa <strong>aman</strong> dulu. Kalau sudah aman, chat jadi lebih lancar.
+      </div>
+
+      <h2 class="hv-h2">1) Pasang “bukti nyata” di tempat yang mudah dilihat</h2>
+      <ul class="hv-ul">
+        <li><span class="hv-tag">Wajib</span> Nama usaha + area layanan (contoh: “Rental Mobil Karangkobar”).</li>
+        <li>Alamat/area pickup (minimal kecamatan/kota).</li>
+        <li>Jam respon yang jelas (contoh: “09.00–21.00 WIB”).</li>
+      </ul>
+
+      <h2 class="hv-h2">2) Tampilkan armada &amp; layanan dengan format rapi</h2>
+      <p class="hv-lead">
+        Jangan bikin orang harus tanya satu-satu.
+        Minimal tampilkan: <strong>nama mobil</strong>, <strong>harga</strong>, <strong>lepas kunci / driver</strong>, dan <strong>catatan singkat</strong>.
+      </p>
+      <ul class="hv-check">
+        <li><span class="dot">✓</span> Nama mobil konsisten (Avanza, Brio, Xenia, dll).</li>
+        <li><span class="dot">✓</span> Harga per hari jelas (atau “mulai dari”).</li>
+        <li><span class="dot">✓</span> Tombol WhatsApp selalu terlihat.</li>
+      </ul>
+
+      <h2 class="hv-h2">3) Punya “template chat” supaya respon cepat</h2>
+      <div class="hv-card" style="background: var(--bg); border-color: rgba(6, 182, 212, 0.25);">
+        <div class="hv-h3" style="margin-top: 0px;">Contoh template aman:</div>
+        <p class="hv-lead" style="margin: 0px;">
+          “Halo Kak, terima kasih. Untuk tanggal [..] jam [..], rute [..], mobil [..] saat ini <strong>tersedia/tidak</strong>.
+          Kakak mau lepas kunci atau dengan driver?”
+        </p>
+        <div class="hv-note">Kalimat ini mengarahkan calon penyewa memilih, bukan menunda.</div>
+      </div>
+
+      <h2 class="hv-h2">4) Ubah status “Tersedia/Tidak” biar tidak buang waktu</h2>
+      <p class="hv-lead">
+        Orang males chat panjang kalau ujungnya “mobilnya nggak ada”.
+        Kalau kamu bisa update status dari HP, calon penyewa merasa kamu profesional.
+      </p>
+
+      <h2 class="hv-h2">5) Google Maps itu etalase trust paling kuat</h2>
+      <ul class="hv-ul">
+        <li><span class="hv-tag">Sakti</span> Tambahkan 1 link rental di profil Google Business.</li>
+        <li>Upload 3–5 foto lokasi/armada (opsional, tapi membantu).</li>
+        <li>Minta review pelanggan yang puas (1 kalimat saja cukup).</li>
+      </ul>
+
+      <h2 class="hv-h2">6) Jelaskan aturan rental dengan bahasa manusia</h2>
+      <p class="hv-lead">
+        Tidak perlu panjang. Cukup poin ringkas: syarat lepas kunci, deposit (jika ada), area penggunaan, dan jam pengembalian.
+        Semakin jelas, semakin dipercaya.
+      </p>
+
+      <h2 class="hv-h2">7) Punya “rumah sendiri” di luar grup &amp; chat</h2>
+      <p class="hv-lead">
+        WhatsApp bagus untuk komunikasi, tapi calon penyewa butuh tempat untuk “melihat dulu”.
+        Satu link yang rapi bikin rental kamu terlihat lebih serius, tanpa perlu bikin website mahal.
+      </p>
+
+      <div class="hv-card" style="border-color: rgba(30, 58, 138, 0.18);">
+        <div class="hv-h3" style="margin-top: 0px;">Checklist cepat sebelum promosi hari ini</div>
+        <ul class="hv-check">
+          <li><span class="dot">1</span> Sudah ada nama usaha + area layanan?</li>
+          <li><span class="dot">2</span> Sudah ada daftar mobil &amp; harga yang rapi?</li>
+          <li><span class="dot">3</span> Sudah ada template chat &amp; jam respon?</li>
+        </ul>
+
+        <div class="hv-cta">
+          <a class="hv-btn-primary" href="/#pricing">Lihat Paket Sistem Rental</a>
+          <a class="hv-btn-secondary" href="https://wa.me/6287783974066?text=Halo%20Hai%20Velyu,%20saya%20pemilik%20rental%20mobil.%20Saya%20mau%20tanya%20cara%20punya%201%20link%20rental%20untuk%20WhatsApp%20%26%20Google%20Maps.%20Kota:%20...%20Jumlah%20armada:%20...">
+            Konsultasi via WhatsApp
+          </a>
+        </div>
+        <div class="hv-note">
+          Catatan: Sistem ini fokus ke katalog &amp; WhatsApp. Konfirmasi jadwal/detail tetap via pemilik rental.
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
